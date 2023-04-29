@@ -4,7 +4,7 @@ export const GlobalStyles = createGlobalStyle`
 *,
 *::before,
 *::after {
-  box - sizing: border - box;
+  box-sizing: border-box;
 }
 
 
@@ -76,10 +76,10 @@ button {
 
 
 html {
-  scroll - behavior: smooth;
+  scroll-behavior: smooth;
 }
 
 a {
-  text - decoration: none;
+  text-decoration: none;
 }
 `;
