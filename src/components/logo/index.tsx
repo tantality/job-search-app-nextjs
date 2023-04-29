@@ -10,4 +10,3 @@ export const Logo: FC = () => {
     </StyledLogo>
   );
 };
-
