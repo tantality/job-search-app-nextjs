@@ -1,8 +1,15 @@
 import styled from '@emotion/styled';
 import { Select } from '@mantine/core';
 import { Inter } from 'next/font/google';
+import Image from 'next/image';
+import styledComponents from 'styled-components';
 
 const inter = Inter({ subsets: ['latin'] });
+
+export const StyledDownArrowIcon = styledComponents(Image)`
+  transition: transform 0.3s ease;
+  transform: scaleY(1);
+`;
 
 export const StyledDropdown = styled(Select)`
   .mantine-Select-wrapper {
@@ -14,8 +21,11 @@ export const StyledDropdown = styled(Select)`
   }
 
   [aria-expanded='true'] {
-    svg {
+    svg,
+    img {
+      filter: brightness(0) saturate(100%) invert(59%) sepia(47%) saturate(2687%) hue-rotate(195deg) brightness(97%) contrast(104%);
       color: #5e96fc !important;
+      transform: scaleY(-1);
     }
   }
 
