@@ -12,6 +12,10 @@ export const StyledDownArrowIcon = styledComponents(Image)`
 `;
 
 export const StyledDropdown = styled(Select)`
+  input::placeholder {
+    color: #acadb9;
+  }
+
   .mantine-Select-wrapper {
     &:hover {
       .mantine-Select-input {
@@ -42,6 +46,7 @@ export const StyledDropdown = styled(Select)`
     font-weight: 400;
     font-size: 14px;
     line-height: 20px;
+    color: #232134;
   }
 
   .mantine-Select-input {
