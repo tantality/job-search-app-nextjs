@@ -50,7 +50,7 @@ export const StyledDropdown = styled(Select)`
   }
 
   .mantine-Select-input {
-    padding: 11px 42px 11px 12px;
+    padding: 11px 48px 11px 12px;
   }
 
   .mantine-Select-item {
