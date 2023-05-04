@@ -7,6 +7,8 @@ import { ButtonProps } from '.';
 const inter = Inter({ subsets: ['latin'] });
 
 const _StyledButton = styled(Button)<Required<Omit<ButtonProps, 'children'>>>`
+  height: auto;
+  border: none;
   border-radius: 8px;
   font-family: ${inter.style.fontFamily};
   font-style: ${inter.style.fontStyle};
@@ -14,8 +16,8 @@ const _StyledButton = styled(Button)<Required<Omit<ButtonProps, 'children'>>>`
   font-size: 14px;
   line-height: 21px;
   transition: 0.2s ease;
-  ${({ importance }) => stylizeButtonStates(importance)};
-  padding: ${({ size }) => (size === 'sm' ? '5.5px 20px' : '10px 20px')};
+  ${({ importance }): string => stylizeButtonStates(importance)};
+  padding: ${({ size }): string => (size === 'sm' ? '5.5px 20px' : '10px 20px')};
 `;
 
 _StyledButton.defaultProps = {
