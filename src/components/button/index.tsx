@@ -10,5 +10,5 @@ export interface ButtonProps {
 }
 
 export const Button: FC<ButtonProps> = ({ children, ...props }) => {
-  return <StyledButton {...props}>{children}</StyledButton >;
+  return <StyledButton {...props}>{children}</StyledButton>;
 };
