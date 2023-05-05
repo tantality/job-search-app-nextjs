@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import DropdownDownArrowIcon from '../../../public/assets/icons/dropdown-down-arrow.svg';
 import { StyledDropdown, StyledDownArrowIcon } from './styled';
 
 interface DropdownProps {
@@ -14,7 +13,7 @@ export const Dropdown: FC<DropdownProps> = ({ placeholder, data }) => {
       placeholder={placeholder ? placeholder : ''}
       size={'md'}
       styles={{ rightSection: { pointerEvents: 'none' } }}
-      rightSection={<StyledDownArrowIcon src={DropdownDownArrowIcon} alt="arrow-icon" />}
+      rightSection={<StyledDownArrowIcon />}
       rightSectionWidth={48}
     />
   );

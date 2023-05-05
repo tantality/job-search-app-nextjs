@@ -1,12 +1,12 @@
 import styled from '@emotion/styled';
 import { Select } from '@mantine/core';
 import { Inter } from 'next/font/google';
-import Image from 'next/image';
 import styledComponents from 'styled-components';
+import DropdownDownArrowIcon from '../../../public/assets/icons/dropdown-down-arrow.svg';
 
 const inter = Inter({ subsets: ['latin'] });
 
-export const StyledDownArrowIcon = styledComponents(Image)`
+export const StyledDownArrowIcon = styledComponents(DropdownDownArrowIcon)`
   transition: transform 0.3s ease;
   transform: scaleY(1);
 `;

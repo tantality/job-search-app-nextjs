@@ -1,6 +1,6 @@
 import { Poppins } from 'next/font/google';
-import Image from 'next/image';
 import styled from 'styled-components';
+import Logo from '../../../public/logo.svg';
 
 const poppins = Poppins({ subsets: ['latin'], weight: '600', style: 'normal' });
 
@@ -10,7 +10,7 @@ export const StyledLogo = styled.div`
   align-items: center;
 `;
 
-export const StyledImage = styled(Image)``;
+export const StyledSvg = styled(Logo)``;
 
 export const StyledLogoText = styled.p`
   font-family: ${poppins.style.fontFamily};
