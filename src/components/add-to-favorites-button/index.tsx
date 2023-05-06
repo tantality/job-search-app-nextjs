@@ -11,7 +11,7 @@ export const AddToFavoritesButton: FC = () => {
   };
 
   return (
-    <StyledAddToFavoritesButton $isActive={isActive} onClick={handleClick}>
+    <StyledAddToFavoritesButton $isActive={isActive} onClick={handleClick} size={24}>
       <StarIcon />
     </StyledAddToFavoritesButton>
   );

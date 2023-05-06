@@ -7,6 +7,7 @@ interface StyledAddToFavoritesButtonProps extends ActionIconProps {
 
 const _StyledAddToFavoritesButton = styled(ActionIcon)<StyledAddToFavoritesButtonProps>`
   background-color: transparent;
+  border: none;
   ${({ $isActive }): string => ($isActive ? setSvgStrokeAndFill('#5e96fc', '#5e96fc') : setSvgStrokeAndFill('#ACADB9', 'transparent'))};
 
   &:hover {
