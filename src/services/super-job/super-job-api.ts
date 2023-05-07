@@ -5,7 +5,7 @@ import { axiosInstance } from './axios';
 
 class SuperJobApi {
   async getVacancies(page: number, itemsCount: number): Promise<VacancyList> {
-    const res = await axiosInstance.get<VacancyList>('/vacancies', {
+    const res = await axiosInstance.get<VacancyList>('/vacancies/', {
       params: {
         count: itemsCount,
         page,
@@ -16,7 +16,7 @@ class SuperJobApi {
   }
 
   async getIndustries(): Promise<Industry[]> {
-    const res = await axiosInstance.get<Industry[]>('/catalogues');
+    const res = await axiosInstance.get<Industry[]>('/catalogues/');
     return res.data;
   }
 }
