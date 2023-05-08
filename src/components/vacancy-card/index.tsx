@@ -1,19 +1,22 @@
 import { FC } from 'react';
 import { HEADING_ORDER, SIZE } from '@/constants';
+import { Vacancy } from '@/types/super-job/vacancies';
 import { AddToFavoritesButton } from '../add-to-favorites-button';
 import { Splitter } from '../splitter';
 import { Heading, HeadingProps } from '../heading';
 import { Text } from '../text';
 import { StyledContainer, StyledContent, StyledVacancyCard, StyledLocation, StyledDescription, StyledLocationIcon } from './styled';
+import { formSalaryOutput } from './utils/form-salary-output';
 
 export interface VacancyCardProps {
   size?: CardSize;
   headingProperties?: Omit<HeadingProps, 'children'>;
+  vacancy: Vacancy;
 }
 
 export type CardSize = SIZE.MD | SIZE.LG;
 
-export const VacancyCard: FC<VacancyCardProps> = ({ size, headingProperties }) => {
+export const VacancyCard: FC<VacancyCardProps> = ({ size, headingProperties, vacancy }) => {
   const isCardSizeEqualMD = size === SIZE.MD;
 
   const headingOrder = isCardSizeEqualMD ? HEADING_ORDER.H2 : HEADING_ORDER.H1;
@@ -26,20 +29,20 @@ export const VacancyCard: FC<VacancyCardProps> = ({ size, headingProperties }) =
     <StyledVacancyCard>
       <StyledContainer>
         <StyledContent cardSize={size}>
-          <Heading {...headingProps}>Менеджер-дизайнер</Heading>
+          <Heading {...headingProps}>{vacancy.profession}</Heading>
           <StyledDescription>
             <Text weight={600} size={descriptionTextSize}>
-              з/п от 80000 rub
+              {formSalaryOutput(vacancy.payment_from, vacancy.payment_to, vacancy.currency)}
             </Text>
             <Splitter />
             <Text weight={400} size={descriptionTextSize}>
-              Полный рабочий день
+              {vacancy.type_of_work.title}
             </Text>
           </StyledDescription>
           <StyledLocation>
             <StyledLocationIcon />
             <Text size={SIZE.MD} lineHeight={locationTextLineHeight}>
-              Москва
+              {vacancy.town.title}
             </Text>
           </StyledLocation>
         </StyledContent>
