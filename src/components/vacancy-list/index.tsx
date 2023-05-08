@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Vacancy } from '@/mocks/vacancies';
+import { Vacancy } from '@/types/super-job/vacancies';
 import { SIZE } from '@/constants';
 import { VacancyCard } from '../vacancy-card';
 import { StyledVacancyList } from './styled';
