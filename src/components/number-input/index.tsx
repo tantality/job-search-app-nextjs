@@ -4,9 +4,19 @@ import { StyledNumberInput } from './styled';
 
 interface NumberInputProps {
   placeholder?: string;
+  value: number;
   onChange: (value: number | '') => void;
 }
 
-export const NumberInput: FC<NumberInputProps> = ({ placeholder, onChange }) => {
-  return <StyledNumberInput placeholder={placeholder ? placeholder : ''} size={SIZE.MD} type="number" min={1} onChange={onChange} />;
+export const NumberInput: FC<NumberInputProps> = ({ placeholder, onChange, value }) => {
+  return (
+    <StyledNumberInput
+      placeholder={placeholder ? placeholder : ''}
+      size={SIZE.MD}
+      type="number"
+      min={1}
+      onChange={onChange}
+      value={value}
+    />
+  );
 };

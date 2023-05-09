@@ -51,11 +51,16 @@ export const VacancyFilter: FC = () => {
       </StyledWrapper>
       <StyledContent>
         <NamedFormGroup groupName="Отрасль">
-          <Dropdown data={data} placeholder={'Выберете отрасль '} onChange={handleDropdownChange} />
+          <Dropdown
+            data={data}
+            placeholder={'Выберете отрасль '}
+            value={String(vacancyFilter.industryId)}
+            onChange={handleDropdownChange}
+          />
         </NamedFormGroup>
         <NamedFormGroup groupName="Оклад">
-          <NumberInput placeholder="От" onChange={handlePaymentFromInput} />
-          <NumberInput placeholder="До" onChange={handlePaymentToInput} />
+          <NumberInput placeholder="От" value={vacancyFilter.paymentFrom} onChange={handlePaymentFromInput} />
+          <NumberInput placeholder="До" value={vacancyFilter.paymentTo} onChange={handlePaymentToInput} />
         </NamedFormGroup>
         <Button onClick={handleSubmitButtonClick}>Применить</Button>
       </StyledContent>
