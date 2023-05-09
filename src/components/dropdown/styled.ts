@@ -55,6 +55,7 @@ export const StyledDropdown = styled(Select)`
 
   .mantine-Select-item {
     padding: 12px 8px;
+    white-space: normal;
   }
 
   [data-hovered] {
