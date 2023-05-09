@@ -4,7 +4,7 @@ import { StyledNumberInput } from './styled';
 
 interface NumberInputProps {
   placeholder?: string;
-  value: number;
+  value: number | '';
   onChange: (value: number | '') => void;
 }
 

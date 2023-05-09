@@ -2,8 +2,8 @@ import { createContext, Dispatch, SetStateAction } from 'react';
 
 export interface VacancyFilter {
   keyword: string;
-  paymentFrom: number;
-  paymentTo: number;
+  paymentFrom: number | '';
+  paymentTo: number | '';
   industryId: number;
 }
 
