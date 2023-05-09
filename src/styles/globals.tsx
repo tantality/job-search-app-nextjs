@@ -82,4 +82,14 @@ html {
 a {
   text-decoration: none;
 }
+
+fieldset, legend{
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+legend {
+  display:contents;
+}
 `;
