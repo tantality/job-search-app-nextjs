@@ -3,10 +3,17 @@ import { StyledDropdown, StyledDownArrowIcon } from './styled';
 
 interface DropdownProps {
   placeholder?: string;
-  data: string[];
+  data: DropdownItem[];
+  onChange: (value: string) => void;
 }
 
-export const Dropdown: FC<DropdownProps> = ({ placeholder, data }) => {
+export interface DropdownItem {
+  id: number;
+  value: string;
+  label: string;
+}
+
+export const Dropdown: FC<DropdownProps> = ({ placeholder, data, onChange }) => {
   return (
     <StyledDropdown
       data={data}
@@ -15,6 +22,7 @@ export const Dropdown: FC<DropdownProps> = ({ placeholder, data }) => {
       styles={{ rightSection: { pointerEvents: 'none' } }}
       rightSection={<StyledDownArrowIcon />}
       rightSectionWidth={48}
+      onChange={onChange}
     />
   );
 };
