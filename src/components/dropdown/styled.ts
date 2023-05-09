@@ -58,6 +58,10 @@ export const StyledDropdown = styled(Select)`
     white-space: normal;
   }
 
+  .mantine-ScrollArea-viewport {
+    max-height: 188px;
+  }
+
   [data-hovered] {
     background-color: #deecff;
   }
