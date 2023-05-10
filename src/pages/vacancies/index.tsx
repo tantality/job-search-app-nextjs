@@ -8,13 +8,14 @@ import { VacancyFilterContext, VacancyFilterContextType } from '@/contexts/vacan
 import { VacancyFilter } from '@/components/vacancy-filter';
 import { ITEMS_PER_PAGE } from '@/constants';
 import { useVacanciesByFilter } from '@/hooks/useVacanciesByFilter';
+import { Pagination } from '@/components/pagination';
 import { StyledMainContent } from './styled';
 
 export default function VacanciesPage() {
   const { vacancyFilter } = useContext(VacancyFilterContext) as VacancyFilterContextType;
 
   const [page, setPage] = useState<number>(1);
-  const { data: vacancyList, refetch } = useVacanciesByFilter(page, ITEMS_PER_PAGE, vacancyFilter);
+  const { data: vacancyList, refetch, isFetching } = useVacanciesByFilter(page, ITEMS_PER_PAGE, vacancyFilter);
 
   useEffect(() => {
     refetch();
@@ -29,7 +30,8 @@ export default function VacanciesPage() {
         <div>
           <SearchInput placeholder="Введите название вакансии" />
           <StyledMainContent>
-            {vacancyList && vacancyList.objects && <VacancyList vacancies={vacancyList.objects} />}
+            {vacancyList && vacancyList.objects && !isFetching ? <VacancyList vacancies={vacancyList.objects} /> : <Loader />}
+            <Pagination total={5} value={page} onChange={setPage} />
           </StyledMainContent>
         </div>
       </TwoColumnLayout>
