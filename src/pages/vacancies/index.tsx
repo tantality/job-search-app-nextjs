@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { ChangeEvent, MouseEvent, useContext, useEffect, useState } from 'react';
 import { Loader } from '@mantine/core';
 import { TwoColumnLayout } from '@/components/layouts/two-column-layout';
 import { Sidebar } from '@/components/sidebar';
@@ -12,7 +12,7 @@ import { Pagination } from '@/components/pagination';
 import { StyledMainContent } from './styled';
 
 export default function VacanciesPage() {
-  const { vacancyFilter } = useContext(VacancyFilterContext) as VacancyFilterContextType;
+  const { vacancyFilter, setVacancyFilter } = useContext(VacancyFilterContext) as VacancyFilterContextType;
 
   const [page, setPage] = useState<number>(1);
   const { data: vacancyList, refetch, isFetching, isPreviousData } = useVacanciesByFilter(page, ITEMS_PER_PAGE, vacancyFilter);
@@ -27,6 +27,16 @@ export default function VacanciesPage() {
     }
   }, [page]);
 
+  const handleSubmitButtonClick = (e: MouseEvent<HTMLButtonElement>): void => {
+    e.stopPropagation();
+    setPage(1);
+  };
+
+  const handleSearchInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    const value = e.currentTarget.value;
+    setVacancyFilter((prev) => ({ ...prev, keyword: value }));
+  };
+
   return (
     <div style={{ marginTop: '40px' }}>
       <TwoColumnLayout>
@@ -34,7 +44,12 @@ export default function VacanciesPage() {
           <VacancyFilter onSubmit={setPage} />
         </Sidebar>
         <div>
-          <SearchInput placeholder="Введите название вакансии" />
+          <SearchInput
+            placeholder="Введите название вакансии"
+            value={vacancyFilter.keyword}
+            onSubmitButtonClick={handleSubmitButtonClick}
+            onChange={handleSearchInputChange}
+          />
           <StyledMainContent>
             {vacancyList && vacancyList.objects && !isFetching ? <VacancyList vacancies={vacancyList.objects} /> : <Loader />}
             <Pagination total={5} value={page} onChange={setPage} />
