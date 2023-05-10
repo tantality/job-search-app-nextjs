@@ -14,3 +14,6 @@ export enum HEADING_ORDER {
   H5 = 5,
   H6 = 6,
 }
+
+export const MAX_VACANCY_COUNT = 500;
+export const ITEMS_PER_PAGE = 4;

@@ -1,41 +1,33 @@
-import { ChangeEvent, MouseEvent, useContext, useEffect, useState } from 'react';
+import { ChangeEvent, MouseEvent, useContext, useState } from 'react';
 import { Loader } from '@mantine/core';
 import { TwoColumnLayout } from '@/components/layouts/two-column-layout';
 import { Sidebar } from '@/components/sidebar';
 import { SearchInput } from '@/components/search-input';
 import { VacancyList } from '@/components/vacancy-list';
-import { VacancyFilterContext, VacancyFilterContextType } from '@/contexts/vacancy-filter/context';
+import { VacancyFilterContext, VacancyFilterContextType, VacancyFilterType } from '@/contexts/vacancy-filter/context';
 import { VacancyFilter } from '@/components/vacancy-filter';
 import { ITEMS_PER_PAGE } from '@/constants';
 import { useVacanciesByFilter } from '@/hooks/useVacanciesByFilter';
 import { Pagination } from '@/components/pagination';
 import { calculatePageAmount } from '@/utils/calculate-page-amount';
+import { initialData } from '@/contexts/vacancy-filter/initial-data';
 import { StyledMainContent } from './styled';
 
 export default function VacanciesPage() {
   const { vacancyFilter, setVacancyFilter } = useContext(VacancyFilterContext) as VacancyFilterContextType;
-
+  const [localVacancyFilter, setLocalVacancyFilter] = useState<VacancyFilterType>(initialData);
   const [page, setPage] = useState<number>(1);
-  const { data: vacancyList, refetch, isFetching, isPreviousData } = useVacanciesByFilter(page, ITEMS_PER_PAGE, vacancyFilter);
-
-  useEffect(() => {
-    refetch();
-  }, []);
-
-  useEffect(() => {
-    if (isPreviousData) {
-      refetch();
-    }
-  }, [page]);
+  const { data: vacancyList, isFetching } = useVacanciesByFilter(page, ITEMS_PER_PAGE, vacancyFilter);
 
   const handleSubmitButtonClick = (e: MouseEvent<HTMLButtonElement>): void => {
     e.stopPropagation();
     setPage(1);
+    setVacancyFilter(localVacancyFilter);
   };
 
   const handleSearchInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const value = e.currentTarget.value;
-    setVacancyFilter((prev) => ({ ...prev, keyword: value }));
+    setLocalVacancyFilter((prev) => ({ ...prev, keyword: value }));
   };
 
   const noVacancies = !isFetching && (!vacancyList || !vacancyList.objects.length);
@@ -48,12 +40,12 @@ export default function VacanciesPage() {
     <div style={{ marginTop: '40px' }}>
       <TwoColumnLayout>
         <Sidebar>
-          <VacancyFilter onSubmit={setPage} />
+          <VacancyFilter setPage={setPage} localVacancyFilter={localVacancyFilter} setLocalVacancyFilter={setLocalVacancyFilter} />
         </Sidebar>
         <div>
           <SearchInput
             placeholder="Введите название вакансии"
-            value={vacancyFilter.keyword}
+            value={localVacancyFilter.keyword}
             onSubmitButtonClick={handleSubmitButtonClick}
             onChange={handleSearchInputChange}
           />

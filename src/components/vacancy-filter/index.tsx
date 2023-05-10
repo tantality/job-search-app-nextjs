@@ -1,6 +1,6 @@
 import { Dispatch, FC, MouseEvent, SetStateAction, useContext } from 'react';
 import { HEADING_ORDER, SIZE } from '@/constants';
-import { VacancyFilterContext, VacancyFilterContextType } from '@/contexts/vacancy-filter/context';
+import { VacancyFilterContext, VacancyFilterContextType, VacancyFilterType } from '@/contexts/vacancy-filter/context';
 import { initialData } from '@/contexts/vacancy-filter/initial-data';
 import { NamedFormGroup } from '../named-form-group';
 import { Dropdown, DropdownItem } from '../dropdown';
@@ -10,11 +10,13 @@ import { Heading } from '../heading';
 import { StyledContent, StyledVacancyFilter, StyledWrapper } from './styled';
 
 interface VacancyFilterProps {
-  onSubmit: Dispatch<SetStateAction<number>>;
+  setPage: Dispatch<SetStateAction<number>>;
+  localVacancyFilter: VacancyFilterType;
+  setLocalVacancyFilter: Dispatch<SetStateAction<VacancyFilterType>>;
 }
 
-export const VacancyFilter: FC<VacancyFilterProps> = ({ onSubmit }) => {
-  const { vacancyFilter, setVacancyFilter } = useContext(VacancyFilterContext) as VacancyFilterContextType;
+export const VacancyFilter: FC<VacancyFilterProps> = ({ setPage, setLocalVacancyFilter, localVacancyFilter }) => {
+  const { setVacancyFilter } = useContext(VacancyFilterContext) as VacancyFilterContextType;
 
   const data: DropdownItem[] = [
     { value: '1', label: 'IT, интернет, связь, телеком' },
@@ -26,24 +28,27 @@ export const VacancyFilter: FC<VacancyFilterProps> = ({ onSubmit }) => {
 
   const handleResetButtonClick = (e: MouseEvent<HTMLButtonElement>): void => {
     e.stopPropagation();
+    setPage(1);
     setVacancyFilter((prev) => ({ ...initialData, keyword: prev.keyword }));
+    setLocalVacancyFilter((prev) => ({ ...initialData, keyword: prev.keyword }));
   };
 
   const handleSubmitButtonClick = (e: MouseEvent<HTMLButtonElement>): void => {
     e.stopPropagation();
-    onSubmit(1);
+    setPage(1);
+    setVacancyFilter(localVacancyFilter);
   };
 
   const handleDropdownChange = (value: string): void => {
-    setVacancyFilter((prev) => ({ ...prev, industryId: Number(value) }));
+    setLocalVacancyFilter((prev) => ({ ...prev, industryId: Number(value) }));
   };
 
   const handlePaymentFromInput = (value: number | ''): void => {
-    setVacancyFilter((prev) => ({ ...prev, paymentFrom: Number(value) }));
+    setLocalVacancyFilter((prev) => ({ ...prev, paymentFrom: Number(value) }));
   };
 
   const handlePaymentToInput = (value: number | ''): void => {
-    setVacancyFilter((prev) => ({ ...prev, paymentTo: Number(value) }));
+    setLocalVacancyFilter((prev) => ({ ...prev, paymentTo: Number(value) }));
   };
 
   return (
@@ -59,13 +64,13 @@ export const VacancyFilter: FC<VacancyFilterProps> = ({ onSubmit }) => {
           <Dropdown
             data={data}
             placeholder={'Выберете отрасль '}
-            value={String(vacancyFilter.industryId)}
+            value={String(localVacancyFilter.industryId)}
             onChange={handleDropdownChange}
           />
         </NamedFormGroup>
         <NamedFormGroup groupName="Оклад">
-          <NumberInput placeholder="От" value={vacancyFilter.paymentFrom} onChange={handlePaymentFromInput} />
-          <NumberInput placeholder="До" value={vacancyFilter.paymentTo} onChange={handlePaymentToInput} />
+          <NumberInput placeholder="От" value={localVacancyFilter.paymentFrom} onChange={handlePaymentFromInput} />
+          <NumberInput placeholder="До" value={localVacancyFilter.paymentTo} onChange={handlePaymentToInput} />
         </NamedFormGroup>
         <Button onClick={handleSubmitButtonClick}>Применить</Button>
       </StyledContent>
