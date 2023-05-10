@@ -1,5 +1,5 @@
 export interface VacancyList {
-  vacancies: Vacancy[];
+  objects: Vacancy[];
   total: number;
   more: boolean;
   subscription_id: number;
