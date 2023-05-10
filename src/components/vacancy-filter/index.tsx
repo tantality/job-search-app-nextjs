@@ -1,4 +1,4 @@
-import { FC, MouseEvent, useContext } from 'react';
+import { Dispatch, FC, MouseEvent, SetStateAction, useContext } from 'react';
 import { HEADING_ORDER, SIZE } from '@/constants';
 import { VacancyFilterContext, VacancyFilterContextType } from '@/contexts/vacancy-filter/context';
 import { initialData } from '@/contexts/vacancy-filter/initial-data';
@@ -9,7 +9,11 @@ import { Button } from '../button';
 import { Heading } from '../heading';
 import { StyledContent, StyledVacancyFilter, StyledWrapper } from './styled';
 
-export const VacancyFilter: FC = () => {
+interface VacancyFilterProps {
+  onSubmit: Dispatch<SetStateAction<number>>;
+}
+
+export const VacancyFilter: FC<VacancyFilterProps> = ({ onSubmit }) => {
   const { vacancyFilter, setVacancyFilter } = useContext(VacancyFilterContext) as VacancyFilterContextType;
 
   const data: DropdownItem[] = [
@@ -27,6 +31,7 @@ export const VacancyFilter: FC = () => {
 
   const handleSubmitButtonClick = (e: MouseEvent<HTMLButtonElement>): void => {
     e.stopPropagation();
+    onSubmit(1);
   };
 
   const handleDropdownChange = (value: string): void => {

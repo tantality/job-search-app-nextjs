@@ -31,7 +31,7 @@ export default function VacanciesPage() {
     <div style={{ marginTop: '40px' }}>
       <TwoColumnLayout>
         <Sidebar>
-          <VacancyFilter />
+          <VacancyFilter onSubmit={setPage} />
         </Sidebar>
         <div>
           <SearchInput placeholder="Введите название вакансии" />
