@@ -15,11 +15,17 @@ export default function VacanciesPage() {
   const { vacancyFilter } = useContext(VacancyFilterContext) as VacancyFilterContextType;
 
   const [page, setPage] = useState<number>(1);
-  const { data: vacancyList, refetch, isFetching } = useVacanciesByFilter(page, ITEMS_PER_PAGE, vacancyFilter);
+  const { data: vacancyList, refetch, isFetching, isPreviousData } = useVacanciesByFilter(page, ITEMS_PER_PAGE, vacancyFilter);
 
   useEffect(() => {
     refetch();
   }, []);
+
+  useEffect(() => {
+    if (isPreviousData) {
+      refetch();
+    }
+  }, [page]);
 
   return (
     <div style={{ marginTop: '40px' }}>
