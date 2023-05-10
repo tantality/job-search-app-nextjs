@@ -1,11 +1,11 @@
 /* eslint-disable import/no-anonymous-default-export */
-import { VacancyFilter } from '@/contexts/vacancy-filter/context';
+import { VacancyFilterType } from '@/contexts/vacancy-filter/context';
 import { Industry } from '@/types/super-job/industries';
 import { VacancyList } from '@/types/super-job/vacancies';
 import { axiosInstance } from './axios';
 
 class SuperJobApi {
-  async getVacanciesByFilter(page: number, itemsCount: number, filter: VacancyFilter): Promise<VacancyList> {
+  async getVacanciesByFilter(page: number, itemsCount: number, filter: VacancyFilterType): Promise<VacancyList> {
     const { paymentFrom, paymentTo, keyword, industryId } = filter;
 
     const res = await axiosInstance.get<VacancyList>('/vacancies/', {

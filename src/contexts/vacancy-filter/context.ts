@@ -1,6 +1,6 @@
 import { createContext, Dispatch, SetStateAction } from 'react';
 
-export interface VacancyFilter {
+export interface VacancyFilterType {
   keyword: string;
   paymentFrom: number | '';
   paymentTo: number | '';
@@ -8,8 +8,8 @@ export interface VacancyFilter {
 }
 
 export interface VacancyFilterContextType {
-  vacancyFilter: VacancyFilter;
-  setVacancyFilter: Dispatch<SetStateAction<VacancyFilter>>;
+  vacancyFilter: VacancyFilterType;
+  setVacancyFilter: Dispatch<SetStateAction<VacancyFilterType>>;
 }
 
 export const VacancyFilterContext = createContext<VacancyFilterContextType | null>(null);

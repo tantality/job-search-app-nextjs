@@ -1,5 +1,5 @@
 import { ReactNode, useState } from 'react';
-import { VacancyFilterContext, VacancyFilter } from './context';
+import { VacancyFilterContext, VacancyFilterType } from './context';
 import { initialData } from './initial-data';
 
 interface VacancyFilterProviderProps {
@@ -7,7 +7,7 @@ interface VacancyFilterProviderProps {
 }
 
 export function VacancyFilterProvider({ children }: VacancyFilterProviderProps) {
-  const [vacancyFilter, setVacancyFilter] = useState<VacancyFilter>(initialData);
+  const [vacancyFilter, setVacancyFilter] = useState<VacancyFilterType>(initialData);
   const value = { vacancyFilter, setVacancyFilter };
 
   return <VacancyFilterContext.Provider value={value}>{children}</VacancyFilterContext.Provider>;

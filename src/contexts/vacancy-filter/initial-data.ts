@@ -1,3 +1,3 @@
-import { VacancyFilter } from './context';
+import { VacancyFilterType } from './context';
 
-export const initialData: VacancyFilter = { keyword: '', paymentFrom: '', paymentTo: '', industryId: 0 };
+export const initialData: VacancyFilterType = { keyword: '', paymentFrom: '', paymentTo: '', industryId: 0 };
