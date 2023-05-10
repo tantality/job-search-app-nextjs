@@ -37,6 +37,12 @@ export default function VacanciesPage() {
     setVacancyFilter((prev) => ({ ...prev, keyword: value }));
   };
 
+  const noVacancies = !isFetching && (!vacancyList || !vacancyList.objects.length);
+
+  if (noVacancies) {
+    return <div>Нет вакансий</div>;
+  }
+
   return (
     <div style={{ marginTop: '40px' }}>
       <TwoColumnLayout>
@@ -52,7 +58,7 @@ export default function VacanciesPage() {
           />
           <StyledMainContent>
             {vacancyList && vacancyList.objects && !isFetching ? <VacancyList vacancies={vacancyList.objects} /> : <Loader />}
-            <Pagination total={5} value={page} onChange={setPage} />
+            {vacancyList && <Pagination total={5} value={page} onChange={setPage} /> }
           </StyledMainContent>
         </div>
       </TwoColumnLayout>
