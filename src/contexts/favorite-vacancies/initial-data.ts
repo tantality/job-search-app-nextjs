@@ -1,5 +1,5 @@
 import { LOCAL_STORAGE_KEY } from '@/constants';
-import { getItemFromLocalStorage } from '@/utils/local-storage-functions';
+import { getItemFromLocalStorage } from '@/utils';
 import { FavoriteVacanciesState } from './types';
 
 const IS_SERVER = typeof window === 'undefined';

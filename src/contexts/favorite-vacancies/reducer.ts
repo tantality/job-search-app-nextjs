@@ -1,5 +1,5 @@
 import { LOCAL_STORAGE_KEY } from '@/constants';
-import { getItemFromLocalStorage, setItemToLocalStorage } from '@/utils/local-storage-functions';
+import { getItemFromLocalStorage, setItemToLocalStorage } from '@/utils';
 import { FAVORITE_VACANCIES_ACTION } from './constants';
 import { FavoriteVacanciesState, FavoriteVacancyAction } from './types';
 
