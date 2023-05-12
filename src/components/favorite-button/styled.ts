@@ -28,6 +28,4 @@ function setSvgStrokeAndFill(strokeColor: string, fillColor?: string): string {
   `;
 }
 
-export const StyledFavoriteButton = createPolymorphicComponent<'button', StyledFavoriteButtonProps>(
-  _StyledFavoriteButton,
-);
+export const StyledFavoriteButton = createPolymorphicComponent<'button', StyledFavoriteButtonProps>(_StyledFavoriteButton);

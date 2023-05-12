@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, MouseEvent, useState } from 'react';
 import { HEADING_ORDER, SIZE } from '@/constants';
 import { Vacancy } from '@/types/super-job/vacancies';
 import { FavoriteButton } from '../favorite-button';
@@ -17,6 +17,8 @@ export interface VacancyCardProps {
 export type CardSize = SIZE.MD | SIZE.LG;
 
 export const VacancyCard: FC<VacancyCardProps> = ({ size, headingProperties, vacancy }) => {
+  const [isFavoriteButtonActive, setIsFavoriteButtonActive] = useState<boolean>(false);
+
   const isCardSizeEqualMD = size === SIZE.MD;
 
   const headingOrder = isCardSizeEqualMD ? HEADING_ORDER.H2 : HEADING_ORDER.H1;
@@ -24,6 +26,11 @@ export const VacancyCard: FC<VacancyCardProps> = ({ size, headingProperties, vac
 
   const descriptionTextSize = isCardSizeEqualMD ? SIZE.SM : SIZE.LG;
   const locationTextLineHeight = isCardSizeEqualMD ? '19px' : '22px';
+
+  const handleFavoriteButtonClick = (e: MouseEvent<HTMLButtonElement>): void => {
+    e.stopPropagation();
+    setIsFavoriteButtonActive((prev) => !prev);
+  };
 
   return (
     <StyledVacancyCard>
@@ -46,7 +53,10 @@ export const VacancyCard: FC<VacancyCardProps> = ({ size, headingProperties, vac
             </Text>
           </StyledLocation>
         </StyledContent>
-        <FavoriteButton />
+        <FavoriteButton
+          isActive={isFavoriteButtonActive}
+          onClick={handleFavoriteButtonClick}
+        />
       </StyledContainer>
     </StyledVacancyCard>
   );
