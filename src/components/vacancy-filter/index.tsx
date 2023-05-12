@@ -2,12 +2,14 @@ import { Dispatch, FC, MouseEvent, SetStateAction, useContext } from 'react';
 import { HEADING_ORDER, SIZE } from '@/constants';
 import { VacancyFilterContext, VacancyFilterContextType, VacancyFilterType } from '@/contexts/vacancy-filter/context';
 import { initialData } from '@/contexts/vacancy-filter/initial-data';
+import { useIndustries } from '@/hooks/useIndustries';
 import { NamedFormGroup } from '../named-form-group';
-import { Dropdown, DropdownItem } from '../dropdown';
+import { Dropdown } from '../dropdown';
 import { NumberInput } from '../number-input';
 import { Button } from '../button';
 import { Heading } from '../heading';
 import { StyledContent, StyledVacancyFilter, StyledWrapper } from './styled';
+import { transformIndustriesToDropdownItems } from './utils';
 
 interface VacancyFilterProps {
   setPage: Dispatch<SetStateAction<number>>;
@@ -18,13 +20,7 @@ interface VacancyFilterProps {
 export const VacancyFilter: FC<VacancyFilterProps> = ({ setPage, setLocalVacancyFilter, localVacancyFilter }) => {
   const { setVacancyFilter } = useContext(VacancyFilterContext) as VacancyFilterContextType;
 
-  const data: DropdownItem[] = [
-    { value: '1', label: 'IT, интернет, связь, телеком' },
-    { value: '2', label: 'Кадры, управление персоналом' },
-    { value: '3', label: 'Искусство, культура, развлечения' },
-    { value: '4', label: 'IT' },
-    { value: '11', label: 'Кадры!!!' },
-  ];
+  const { data: industries } = useIndustries();
 
   const handleResetButtonClick = (e: MouseEvent<HTMLButtonElement>): void => {
     e.stopPropagation();
@@ -62,7 +58,7 @@ export const VacancyFilter: FC<VacancyFilterProps> = ({ setPage, setLocalVacancy
       <StyledContent>
         <NamedFormGroup groupName="Отрасль">
           <Dropdown
-            data={data}
+            data={transformIndustriesToDropdownItems(industries)}
             placeholder={'Выберете отрасль '}
             value={String(localVacancyFilter.industryId)}
             onChange={handleDropdownChange}
