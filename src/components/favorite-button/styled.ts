@@ -1,11 +1,11 @@
 import styled from '@emotion/styled';
 import { ActionIcon, ActionIconProps, createPolymorphicComponent } from '@mantine/core';
 
-interface StyledAddToFavoritesButtonProps extends ActionIconProps {
+interface StyledFavoriteButtonProps extends ActionIconProps {
   $isActive: boolean;
 }
 
-const _StyledAddToFavoritesButton = styled(ActionIcon)<StyledAddToFavoritesButtonProps>`
+const _StyledFavoriteButton = styled(ActionIcon)<StyledFavoriteButtonProps>`
   background-color: transparent;
   border: none;
   ${({ $isActive }): string => ($isActive ? setSvgStrokeAndFill('#5e96fc', '#5e96fc') : setSvgStrokeAndFill('#ACADB9', 'transparent'))};
@@ -28,6 +28,6 @@ function setSvgStrokeAndFill(strokeColor: string, fillColor?: string): string {
   `;
 }
 
-export const StyledAddToFavoritesButton = createPolymorphicComponent<'button', StyledAddToFavoritesButtonProps>(
-  _StyledAddToFavoritesButton,
+export const StyledFavoriteButton = createPolymorphicComponent<'button', StyledFavoriteButtonProps>(
+  _StyledFavoriteButton,
 );

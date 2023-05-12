@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { HEADING_ORDER, SIZE } from '@/constants';
 import { Vacancy } from '@/types/super-job/vacancies';
-import { AddToFavoritesButton } from '../add-to-favorites-button';
+import { FavoriteButton } from '../favorite-button';
 import { Splitter } from '../splitter';
 import { Heading, HeadingProps } from '../heading';
 import { Text } from '../text';
@@ -46,7 +46,7 @@ export const VacancyCard: FC<VacancyCardProps> = ({ size, headingProperties, vac
             </Text>
           </StyledLocation>
         </StyledContent>
-        <AddToFavoritesButton />
+        <FavoriteButton />
       </StyledContainer>
     </StyledVacancyCard>
   );

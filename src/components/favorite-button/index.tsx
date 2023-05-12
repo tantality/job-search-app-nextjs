@@ -1,8 +1,8 @@
 import { FC, useState, MouseEvent } from 'react';
 import StarIcon from '../../../public/assets/icons/star.svg';
-import { StyledAddToFavoritesButton } from './styled';
+import { StyledFavoriteButton } from './styled';
 
-export const AddToFavoritesButton: FC = () => {
+export const FavoriteButton: FC = () => {
   const [isActive, setIsActive] = useState<boolean>(false);
 
   const handleClick = (e: MouseEvent<HTMLButtonElement>): void => {
@@ -11,8 +11,8 @@ export const AddToFavoritesButton: FC = () => {
   };
 
   return (
-    <StyledAddToFavoritesButton $isActive={isActive} onClick={handleClick} size={24}>
+    <StyledFavoriteButton $isActive={isActive} onClick={handleClick} size={24}>
       <StarIcon />
-    </StyledAddToFavoritesButton>
+    </StyledFavoriteButton>
   );
 };
