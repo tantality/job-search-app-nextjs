@@ -1,6 +1,9 @@
-import { FC, MouseEvent, useState } from 'react';
+import { Dispatch, FC, MouseEvent, useContext, useState } from 'react';
 import { HEADING_ORDER, SIZE } from '@/constants';
 import { Vacancy } from '@/types/super-job/vacancies';
+import { deleteVacancyFromFavoritesAction, addVacancyToFavoritesAction } from '@/contexts/favorite-vacancies/actions';
+import { FavoriteVacanciesContext, FavoriteVacanciesDispatchContext } from '@/contexts/favorite-vacancies/context';
+import { FavoriteVacanciesState, FavoriteVacancyAction } from '@/contexts/favorite-vacancies/types';
 import { FavoriteButton } from '../favorite-button';
 import { Splitter } from '../splitter';
 import { Heading, HeadingProps } from '../heading';
@@ -17,7 +20,9 @@ export interface VacancyCardProps {
 export type CardSize = SIZE.MD | SIZE.LG;
 
 export const VacancyCard: FC<VacancyCardProps> = ({ size, headingProperties, vacancy }) => {
-  const [isFavoriteButtonActive, setIsFavoriteButtonActive] = useState<boolean>(false);
+  const { ids } = useContext(FavoriteVacanciesContext) as FavoriteVacanciesState;
+  const dispatch = useContext(FavoriteVacanciesDispatchContext) as Dispatch<FavoriteVacancyAction>;
+  const [isFavoriteButtonActive, setIsFavoriteButtonActive] = useState<boolean>(ids.includes(vacancy.id));
 
   const isCardSizeEqualMD = size === SIZE.MD;
 
@@ -27,8 +32,15 @@ export const VacancyCard: FC<VacancyCardProps> = ({ size, headingProperties, vac
   const descriptionTextSize = isCardSizeEqualMD ? SIZE.SM : SIZE.LG;
   const locationTextLineHeight = isCardSizeEqualMD ? '19px' : '22px';
 
-  const handleFavoriteButtonClick = (e: MouseEvent<HTMLButtonElement>): void => {
+  const handleFavoriteButtonClick = (e: MouseEvent<HTMLButtonElement>, vacancyId: number): void => {
     e.stopPropagation();
+
+    if (isFavoriteButtonActive) {
+      dispatch(deleteVacancyFromFavoritesAction(vacancyId));
+    } else {
+      dispatch(addVacancyToFavoritesAction(vacancyId));
+    }
+
     setIsFavoriteButtonActive((prev) => !prev);
   };
 
@@ -55,7 +67,7 @@ export const VacancyCard: FC<VacancyCardProps> = ({ size, headingProperties, vac
         </StyledContent>
         <FavoriteButton
           isActive={isFavoriteButtonActive}
-          onClick={handleFavoriteButtonClick}
+          onClick={(e: MouseEvent<HTMLButtonElement>): void => handleFavoriteButtonClick(e, vacancy.id)}
         />
       </StyledContainer>
     </StyledVacancyCard>
