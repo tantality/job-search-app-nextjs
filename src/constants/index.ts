@@ -17,3 +17,7 @@ export enum HEADING_ORDER {
 
 export const MAX_VACANCY_COUNT = 500;
 export const ITEMS_PER_PAGE = 4;
+
+export enum LOCAL_STORAGE_KEY {
+  FAVORITE_VACANCY_IDS = 'favorite-vacancy-ids',
+}
