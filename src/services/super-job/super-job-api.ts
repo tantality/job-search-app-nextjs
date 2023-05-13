@@ -22,6 +22,16 @@ class SuperJobApi {
     return res.data;
   }
 
+  async getVacanciesByIds(ids: number[]): Promise<VacancyList> {
+    const res = await axiosInstance.get<VacancyList>('/vacancies/', {
+      params: {
+        ids,
+      },
+    });
+
+    return res.data;
+  }
+
   async getIndustries(): Promise<Industry[]> {
     const res = await axiosInstance.get<Industry[]>('/catalogues/');
     return res.data;
