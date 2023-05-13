@@ -1,3 +1,41 @@
+import { useContext, useState } from 'react';
+import { Loader } from '@mantine/core';
+import { useVacanciesByIds } from '@/hooks/useVacanciesByIds';
+import { ITEMS_PER_PAGE } from '@/constants';
+import { VacancyList } from '@/components/vacancy-list';
+import { calculatePageAmount } from '@/utils';
+import { Pagination } from '@/components/pagination';
+import { FavoriteVacanciesContext } from '@/contexts/favorite-vacancies/context';
+import { FavoriteVacanciesState } from '@/contexts/favorite-vacancies/types';
+
 export default function FavoritesPage() {
-  return <p>Favorite vacancies</p>;
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const { ids } = useContext(FavoriteVacanciesContext) as FavoriteVacanciesState;
+  const [initialIds] = useState([...new Set(ids)]);
+
+  const startInd = -ITEMS_PER_PAGE + currentPage * ITEMS_PER_PAGE;
+  const endInd = startInd + ITEMS_PER_PAGE;
+  const idsChunkToFetch = initialIds.filter((item, ind) => ind >= startInd && ind < endInd);
+
+  const {
+    data: vacancyList,
+    isFetching,
+    isSuccess,
+  } = useVacanciesByIds(idsChunkToFetch, { enabled: Boolean(initialIds.length) });
+
+  const noVacancies = !isFetching && (!vacancyList || !initialIds.length || !vacancyList.total);
+
+  if (noVacancies) {
+    return <div>Нет вакансий</div>;
+  }
+
+  const pageCount = calculatePageAmount(initialIds.length, ITEMS_PER_PAGE);
+
+  return (
+    <div>
+      {isSuccess && !isFetching ? <VacancyList vacancies={vacancyList.objects} /> : <Loader />}
+      {isSuccess && pageCount > 1 && <Pagination total={pageCount} value={currentPage} onChange={setCurrentPage} />}
+    </div>
+  );
 }
