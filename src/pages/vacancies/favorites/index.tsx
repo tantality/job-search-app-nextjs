@@ -3,7 +3,7 @@ import { Loader } from '@mantine/core';
 import { useVacanciesByIds } from '@/hooks/useVacanciesByIds';
 import { ITEMS_PER_PAGE } from '@/constants';
 import { VacancyList } from '@/components/vacancy-list';
-import { calculatePageAmount } from '@/utils';
+import { calculatePageCount } from '@/utils';
 import { Pagination } from '@/components/pagination';
 import { FavoriteVacanciesContext } from '@/contexts/favorite-vacancies/context';
 import { FavoriteVacanciesState } from '@/contexts/favorite-vacancies/types';
@@ -30,7 +30,7 @@ export default function FavoritesPage() {
     return <div>Нет вакансий</div>;
   }
 
-  const pageCount = calculatePageAmount(initialIds.length, ITEMS_PER_PAGE);
+  const pageCount = calculatePageCount(initialIds.length, ITEMS_PER_PAGE);
 
   return (
     <div>

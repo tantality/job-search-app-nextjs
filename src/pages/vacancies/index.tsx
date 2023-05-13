@@ -9,7 +9,7 @@ import { VacancyFilter } from '@/components/vacancy-filter';
 import { ITEMS_PER_PAGE } from '@/constants';
 import { useVacanciesByFilter } from '@/hooks/useVacanciesByFilter';
 import { Pagination } from '@/components/pagination';
-import { calculatePageAmount } from '@/utils/calculate-page-amount';
+import { calculatePageCount } from '@/utils/calculate-page-count';
 import { initialData } from '@/contexts/vacancy-filter/initial-data';
 import { StyledMainContent } from './styled';
 
@@ -51,7 +51,7 @@ export default function VacanciesPage() {
           />
           <StyledMainContent>
             {vacancyList && vacancyList.objects && !isFetching ? <VacancyList vacancies={vacancyList.objects} /> : <Loader />}
-            {vacancyList && <Pagination total={calculatePageAmount(vacancyList.total, ITEMS_PER_PAGE)} value={page} onChange={setPage} />}
+            {vacancyList && <Pagination total={calculatePageCount(vacancyList.total, ITEMS_PER_PAGE)} value={page} onChange={setPage} />}
           </StyledMainContent>
         </div>
       </TwoColumnLayout>

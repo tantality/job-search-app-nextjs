@@ -1,2 +1,2 @@
-export * from './calculate-page-amount';
+export * from './calculate-page-count';
 export * from './local-storage-functions';

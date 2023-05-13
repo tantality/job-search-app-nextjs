@@ -1,6 +1,6 @@
 import { MAX_VACANCY_COUNT } from '@/constants';
 
-export const calculatePageAmount = (totalItemCount: number, itemsPerPage: number): number => {
+export const calculatePageCount = (totalItemCount: number, itemsPerPage: number): number => {
   if (totalItemCount <= itemsPerPage) {
     return 1;
   }
