@@ -1,5 +1,5 @@
 import { Dispatch, FC, MouseEvent, SetStateAction, useContext } from 'react';
-import { HEADING_ORDER, SIZE } from '@/constants';
+import { HEADING_ORDER } from '@/constants';
 import { VacancyFilterContext, VacancyFilterContextType, VacancyFilterType } from '@/contexts/vacancy-filter/context';
 import { initialData } from '@/contexts/vacancy-filter/initial-data';
 import { useIndustries } from '@/hooks/useIndustries';
@@ -8,6 +8,7 @@ import { Dropdown } from '../dropdown';
 import { NumberInput } from '../number-input';
 import { Button } from '../button';
 import { Heading } from '../heading';
+import { ResetButton } from '../reset-button';
 import { StyledContent, StyledVacancyFilter, StyledWrapper } from './styled';
 import { transformIndustriesToDropdownItems } from './utils';
 
@@ -51,15 +52,13 @@ export const VacancyFilter: FC<VacancyFilterProps> = ({ setPage, setLocalVacancy
     <StyledVacancyFilter>
       <StyledWrapper>
         <Heading order={HEADING_ORDER.H2}>Фильтры</Heading>
-        <Button size={SIZE.SM} onClick={handleResetButtonClick}>
-          Сбросить
-        </Button>
+        <ResetButton onClick={handleResetButtonClick}>Сбросить все</ResetButton>
       </StyledWrapper>
       <StyledContent>
         <NamedFormGroup groupName="Отрасль">
           <Dropdown
             data={transformIndustriesToDropdownItems(industries)}
-            placeholder={'Выберете отрасль '}
+            placeholder="Выберите отрасль"
             value={String(localVacancyFilter.industryId)}
             onChange={handleDropdownChange}
           />
