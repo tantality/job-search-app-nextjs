@@ -12,6 +12,7 @@ import { Pagination } from '@/components/pagination';
 import { calculatePageCount } from '@/utils/calculate-page-count';
 import { initialData } from '@/contexts/vacancy-filter/initial-data';
 import { Container } from '@/components/container';
+import { NoVacanciesScreen } from '@/components/no-vacancies-screen';
 import { StyledMainContent } from './styled';
 
 export default function VacanciesPage() {
@@ -19,6 +20,16 @@ export default function VacanciesPage() {
   const [localVacancyFilter, setLocalVacancyFilter] = useState<VacancyFilterType>(initialData);
   const [page, setPage] = useState<number>(1);
   const { data: vacancyList, isFetching } = useVacanciesByFilter(page, ITEMS_PER_PAGE, vacancyFilter);
+
+  const noVacancies = !isFetching && (!vacancyList || !vacancyList.objects.length);
+  if (noVacancies) {
+    return <NoVacanciesScreen onButtonClick={resetFiltersToInitialData} />;
+  }
+
+  function resetFiltersToInitialData(): void {
+    setVacancyFilter(initialData);
+    setLocalVacancyFilter(initialData);
+  };
 
   const handleSubmitButtonClick = (e: MouseEvent<HTMLButtonElement>): void => {
     e.stopPropagation();
@@ -30,12 +41,6 @@ export default function VacanciesPage() {
     const value = e.currentTarget.value;
     setLocalVacancyFilter((prev) => ({ ...prev, keyword: value }));
   };
-
-  const noVacancies = !isFetching && (!vacancyList || !vacancyList.objects.length);
-
-  if (noVacancies) {
-    return <div>Нет вакансий</div>;
-  }
 
   return (
     <Container>
