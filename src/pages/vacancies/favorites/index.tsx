@@ -3,7 +3,7 @@ import { Loader } from '@mantine/core';
 import { useVacanciesByIds } from '@/hooks/useVacanciesByIds';
 import { ITEMS_PER_PAGE } from '@/constants';
 import { VacancyList } from '@/components/vacancy-list';
-import { calculatePageCount } from '@/utils';
+import { calculatePageCount, getDataChunk } from '@/utils';
 import { Pagination } from '@/components/pagination';
 import { FavoriteVacanciesContext } from '@/contexts/favorite-vacancies/context';
 import { FavoriteVacanciesState } from '@/contexts/favorite-vacancies/types';
@@ -16,9 +16,7 @@ export default function FavoritesPage() {
   const { ids } = useContext(FavoriteVacanciesContext) as FavoriteVacanciesState;
   const [initialIds] = useState([...new Set(ids)]);
 
-  const startInd = -ITEMS_PER_PAGE + currentPage * ITEMS_PER_PAGE;
-  const endInd = startInd + ITEMS_PER_PAGE;
-  const idsChunkToFetch = initialIds.filter((item, ind) => ind >= startInd && ind < endInd);
+  const idsChunkToFetch = getDataChunk(initialIds, ITEMS_PER_PAGE, currentPage);
 
   const {
     data: vacancyList,
