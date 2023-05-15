@@ -5,7 +5,9 @@ interface StyledFavoriteButtonProps extends ActionIconProps {
   $isActive: boolean;
 }
 
-const _StyledFavoriteButton = styled(ActionIcon)<StyledFavoriteButtonProps>`
+const _StyledFavoriteButton = styled(ActionIcon, {
+  shouldForwardProp: (prop) => prop !== '$isActive',
+})<StyledFavoriteButtonProps>`
   background-color: transparent;
   border: none;
   ${({ $isActive }): string => ($isActive ? setSvgStrokeAndFill('#5e96fc', '#5e96fc') : setSvgStrokeAndFill('#ACADB9', 'transparent'))};

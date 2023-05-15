@@ -5,7 +5,9 @@ import { TextProps } from '.';
 
 const inter = Inter({ subsets: ['latin'] });
 
-export const StyledText = styled(Text)<Omit<TextProps, 'children'>>`
+export const StyledText = styled(Text, {
+  shouldForwardProp: (prop) => prop !== 'lineHeight',
+})<Omit<TextProps, 'children'>>`
   font-family: ${inter.style.fontFamily};
   font-style: ${inter.style.fontStyle};
   line-height: ${({ lineHeight }): string => (lineHeight ? lineHeight : '20px')};
