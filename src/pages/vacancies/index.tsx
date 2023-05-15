@@ -11,6 +11,7 @@ import { useVacanciesByFilter } from '@/hooks/useVacanciesByFilter';
 import { Pagination } from '@/components/pagination';
 import { calculatePageCount } from '@/utils/calculate-page-count';
 import { initialData } from '@/contexts/vacancy-filter/initial-data';
+import { Container } from '@/components/container';
 import { StyledMainContent } from './styled';
 
 export default function VacanciesPage() {
@@ -37,7 +38,7 @@ export default function VacanciesPage() {
   }
 
   return (
-    <div style={{ marginTop: '40px' }}>
+    <Container>
       <TwoColumnLayout>
         <Sidebar>
           <VacancyFilter setPage={setPage} localVacancyFilter={localVacancyFilter} setLocalVacancyFilter={setLocalVacancyFilter} />
@@ -55,6 +56,6 @@ export default function VacanciesPage() {
           </StyledMainContent>
         </div>
       </TwoColumnLayout>
-    </div>
+    </Container>
   );
 }

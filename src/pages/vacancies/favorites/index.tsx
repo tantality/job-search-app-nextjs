@@ -7,6 +7,7 @@ import { calculatePageCount } from '@/utils';
 import { Pagination } from '@/components/pagination';
 import { FavoriteVacanciesContext } from '@/contexts/favorite-vacancies/context';
 import { FavoriteVacanciesState } from '@/contexts/favorite-vacancies/types';
+import { Container } from '@/components/container';
 import { StyledContainer } from './styled';
 
 export default function FavoritesPage() {
@@ -34,11 +35,13 @@ export default function FavoritesPage() {
   const pageCount = calculatePageCount(initialIds.length, ITEMS_PER_PAGE);
 
   return (
-    <main>
-      <StyledContainer>
-        {isSuccess && !isFetching ? <VacancyList vacancies={vacancyList.objects} /> : <Loader />}
-        {isSuccess && pageCount > 1 && <Pagination total={pageCount} value={currentPage} onChange={setCurrentPage} />}
-      </StyledContainer>
-    </main>
+    <Container maxWidth={773}>
+      <main>
+        <StyledContainer>
+          {isSuccess && !isFetching ? <VacancyList vacancies={vacancyList.objects} /> : <Loader />}
+          {isSuccess && pageCount > 1 && <Pagination total={pageCount} value={currentPage} onChange={setCurrentPage} />}
+        </StyledContainer>
+      </main>
+    </Container>
   );
 }
