@@ -10,6 +10,7 @@ export const StyledVacancyCard = styled.div`
   border: 1px solid #eaebed;
   padding: 23px;
   height: auto;
+  width: 100%;
 `;
 
 export const StyledContainer = styled.div`
