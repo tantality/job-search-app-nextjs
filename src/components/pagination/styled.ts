@@ -7,7 +7,8 @@ export const StyledPagination = styled(Pagination)`
     color: #232134;
   }
 
-  button:last-child {
+  button:first-child:not([data-disabled]),
+  button:last-child:not([data-disabled]) {
     color: #7b7c88;
   }
 
@@ -21,7 +22,7 @@ export const StyledPagination = styled(Pagination)`
     color: #fff;
   }
 
-  [data-disabled] {
+  [data-disabled='true'] {
     opacity: 1;
     border: 1px solid #eaebed;
     background-color: #fff;
