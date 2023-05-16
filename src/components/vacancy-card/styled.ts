@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Link from 'next/link';
 import { SIZE } from '@/constants';
 import LocationIcon from '../../../public/assets/icons/location.svg';
 import { CardSize } from '.';
@@ -52,4 +53,16 @@ export const StyledLocation = styled.div`
 
 export const StyledLocationIcon = styled(LocationIcon)`
   max-width: 20px;
+`;
+
+export const StyledLink = styled(Link)`
+  color: #5e96fc;
+
+  &:hover {
+    color: #92c1ff;
+  }
+
+  &:active {
+    color: #3b7cd3;
+  }
 `;
