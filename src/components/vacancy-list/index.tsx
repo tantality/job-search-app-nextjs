@@ -11,13 +11,14 @@ export interface VacancyListProps {
 export const VacancyList: FC<VacancyListProps> = ({ vacancies }) => {
   return (
     <StyledVacancyList>
-      {vacancies.map((vacancy) => {
-        return (
-          <li key={vacancy.id}>
-            <VacancyCard vacancy={vacancy} size={SIZE.MD} headingProperties={{ weight: 600, color: '#5E96FC' }} />
-          </li>
-        );
-      })}
+      {vacancies &&
+        vacancies.map((vacancy) => {
+          return (
+            <li key={vacancy.id}>
+              <VacancyCard vacancy={vacancy} size={SIZE.MD} headingProperties={{ weight: 600 }} isHeadingLink={true} />
+            </li>
+          );
+        })}
     </StyledVacancyList>
   );
 };

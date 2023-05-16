@@ -8,18 +8,19 @@ import { FavoriteButton } from '../favorite-button';
 import { Splitter } from '../splitter';
 import { Heading, HeadingProps } from '../heading';
 import { Text } from '../text';
-import { StyledContainer, StyledContent, StyledVacancyCard, StyledLocation, StyledDescription, StyledLocationIcon } from './styled';
+import { StyledContainer, StyledContent, StyledVacancyCard, StyledLocation, StyledDescription, StyledLocationIcon, StyledLink } from './styled';
 import { formSalaryOutput } from './utils/form-salary-output';
 
 export interface VacancyCardProps {
   size?: CardSize;
   headingProperties?: Omit<HeadingProps, 'children'>;
   vacancy: Vacancy;
+  isHeadingLink?: boolean;
 }
 
 export type CardSize = SIZE.MD | SIZE.LG;
 
-export const VacancyCard: FC<VacancyCardProps> = ({ size, headingProperties, vacancy }) => {
+export const VacancyCard: FC<VacancyCardProps> = ({ size, headingProperties, vacancy, isHeadingLink }) => {
   const { ids } = useContext(FavoriteVacanciesContext) as FavoriteVacanciesState;
   const dispatch = useContext(FavoriteVacanciesDispatchContext) as Dispatch<FavoriteVacancyAction>;
   const [isFavoriteButtonActive, setIsFavoriteButtonActive] = useState<boolean>(ids.includes(vacancy.id));
@@ -28,6 +29,13 @@ export const VacancyCard: FC<VacancyCardProps> = ({ size, headingProperties, vac
 
   const headingOrder = isCardSizeEqualMD ? HEADING_ORDER.H2 : HEADING_ORDER.H1;
   const headingProps = { order: headingOrder, ...headingProperties };
+  const heading = isHeadingLink ? (
+    <StyledLink href={`/vacancies/${vacancy.id}`}>
+      <Heading {...headingProps}>{vacancy.profession}</Heading>
+    </StyledLink>
+  ) : (
+    <Heading {...headingProps}>{vacancy.profession}</Heading>
+  );
 
   const descriptionTextSize = isCardSizeEqualMD ? SIZE.SM : SIZE.LG;
   const locationTextLineHeight = isCardSizeEqualMD ? '19px' : '22px';
@@ -48,7 +56,7 @@ export const VacancyCard: FC<VacancyCardProps> = ({ size, headingProperties, vac
     <StyledVacancyCard>
       <StyledContainer>
         <StyledContent cardSize={size}>
-          <Heading {...headingProps}>{vacancy.profession}</Heading>
+          {heading}
           <StyledDescription>
             <Text weight={600} size={descriptionTextSize}>
               {formSalaryOutput(vacancy.payment_from, vacancy.payment_to, vacancy.currency)}
