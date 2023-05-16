@@ -1,7 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 import { VacancyFilterType } from '@/contexts/vacancy-filter/context';
 import { Industry } from '@/types/super-job/industries';
-import { VacancyList } from '@/types/super-job/vacancies';
+import { Vacancy, VacancyList } from '@/types/super-job/vacancies';
 import { axiosInstance } from './axios';
 
 class SuperJobApi {
@@ -29,6 +29,11 @@ class SuperJobApi {
       },
     });
 
+    return res.data;
+  }
+
+  async getVacancy(id: number): Promise<Vacancy> {
+    const res = await axiosInstance.get<Vacancy>(`/vacancies/${id}/`);
     return res.data;
   }
 
