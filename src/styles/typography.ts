@@ -29,6 +29,10 @@ export const StyledTypography = styled(TypographyStylesProvider)`
 
     li {
       margin-top: 0;
+
+      p {
+        margin: 0;
+      }
     }
   }
 `;
