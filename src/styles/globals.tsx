@@ -32,6 +32,9 @@ body,
   margin: 0;
 }
 
+html {
+  margin-left: calc(100vw - 100%);
+}
 
 body {
   min-height: 100vh;
