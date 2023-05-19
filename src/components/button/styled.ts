@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
-import { Button, createPolymorphicComponent, MANTINE_SIZES } from '@mantine/core';
+import { Button, createPolymorphicComponent } from '@mantine/core';
 import { Inter } from 'next/font/google';
+import { SIZE } from '@/constants';
 import { BUTTON_IMPORTANCE, BUTTON_PROPERTIES } from './constants';
 import { ButtonProps } from '.';
 
@@ -17,12 +18,12 @@ const _StyledButton = styled(Button)<Required<Omit<ButtonProps, 'children'>>>`
   line-height: 21px;
   transition: 0.2s ease;
   ${({ importance }): string => stylizeButtonStates(importance)};
-  padding: ${({ size }): string => (size === 'sm' ? '5.5px 20px' : '10px 20px')};
+  padding: ${({ size }): string => (size === SIZE.SM ? '5.5px 20px' : '10px 20px')};
 `;
 
 _StyledButton.defaultProps = {
   importance: BUTTON_IMPORTANCE.PRIMARY,
-  size: MANTINE_SIZES[2],
+  size: SIZE.MD,
 };
 
 const stylizeButtonStates = (importance: BUTTON_IMPORTANCE): string => {
