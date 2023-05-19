@@ -8,3 +8,7 @@ export const StyledContainer = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
+export const StyledMainContent = styled.div`
+  height: 100%;
+`;

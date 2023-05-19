@@ -5,7 +5,7 @@ import { useVacancy } from '@/hooks/useVacancy';
 import { VacancyCard } from '@/components/vacancy-card';
 import { SIZE } from '@/constants';
 import { VacancyDescription } from '@/components/vacancy-description';
-import { StyledContainer } from './styled';
+import { StyledContainer, StyledMainContent } from './styled';
 
 export default function VacancyPage() {
   const { query } = useRouter();
@@ -16,17 +16,18 @@ export default function VacancyPage() {
 
   return (
     <Container maxWidth={773}>
-      <main>
+      <StyledMainContent>
         <StyledContainer>
-          {isSuccess && !isFetching ?
+          {isSuccess && !isFetching ? (
             <>
               <VacancyCard size={SIZE.LG} vacancy={vacancy} />
               <VacancyDescription description={vacancy.vacancyRichText} />
-            </> :
+            </>
+          ) : (
             <Loader />
-          }
+          )}
         </StyledContainer>
-      </main>
+      </StyledMainContent>
     </Container>
   );
 }
