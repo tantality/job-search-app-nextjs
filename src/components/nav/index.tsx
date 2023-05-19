@@ -2,12 +2,12 @@ import { FC } from 'react';
 import { NavItem } from '../nav-item';
 import { StyledList, StyledNav } from './styled';
 
-export const Nav: FC = () => {
-  const MENU_ITEMS: NavItem[] = [
-    { name: 'Поиск Вакансий', path: '/vacancies' },
-    { name: 'Избранное', path: '/vacancies/favorites' },
-  ];
+const MENU_ITEMS: NavItem[] = [
+  { name: 'Поиск Вакансий', path: '/vacancies' },
+  { name: 'Избранное', path: '/vacancies/favorites' },
+];
 
+export const Nav: FC = () => {
   return (
     <StyledNav>
       <StyledList>

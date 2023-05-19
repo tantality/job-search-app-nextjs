@@ -8,9 +8,20 @@ export const StyledLogo = styled.div`
   display: flex;
   column-gap: 12px;
   align-items: center;
+  @media (max-width: 450px) {
+    justify-content: center;
+  }
 `;
 
-export const StyledSvg = styled(Logo)``;
+export const StyledSvg = styled(Logo)`
+  width: 30px;
+  height: 30px;
+
+  @media (max-width: 700px) {
+    width: 27px;
+    height: 27px;
+  }
+`;
 
 export const StyledLogoText = styled.p`
   font-family: ${poppins.style.fontFamily};
@@ -20,4 +31,9 @@ export const StyledLogoText = styled.p`
   line-height: 36px;
   letter-spacing: -0.02em;
   color: #232134;
+
+  @media (max-width: 700px) {
+    font-size: 21px;
+    line-height: 30px;
+  }
 `;

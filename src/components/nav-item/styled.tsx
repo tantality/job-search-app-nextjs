@@ -31,4 +31,8 @@ export const StyledLink = styled(Link)<StyledLinkProps>`
        font-weight: 500;
        color:#5E96FC;
     `}
+
+  @media(max-width:700px) {
+    font-size: 15px;
+  }
 `;
