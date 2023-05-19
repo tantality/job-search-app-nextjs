@@ -1,11 +1,11 @@
-import { MantineSize } from '@mantine/core';
 import { FontWeight } from 'next/dist/compiled/@vercel/og/satori';
 import { FC, ReactNode } from 'react';
+import { SIZE } from '@/constants';
 import { StyledText } from './styled';
 
 export interface TextProps {
   weight?: FontWeight;
-  size?: MantineSize;
+  size?: SIZE | string;
   lineHeight?: string;
   children: ReactNode;
 }
