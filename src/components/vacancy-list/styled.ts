@@ -6,4 +6,8 @@ export const StyledVacancyList = styled.ul`
   row-gap: 16px;
   width: 100%;
   height: 100%;
+
+  @media (max-width: 550px) {
+    row-gap: 12px;
+  }
 `;
