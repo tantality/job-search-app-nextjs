@@ -9,7 +9,7 @@ import { FavoriteVacanciesContext } from '@/contexts/favorite-vacancies/context'
 import { FavoriteVacanciesState } from '@/contexts/favorite-vacancies/types';
 import { Container } from '@/components/container';
 import { NoVacanciesScreen } from '@/components/no-vacancies-screen';
-import { StyledContainer } from './styled';
+import { StyledContainer } from '@/styles/pages/vacancies/favorites-styled';
 
 export default function FavoritesPage() {
   const [currentPage, setCurrentPage] = useState(1);

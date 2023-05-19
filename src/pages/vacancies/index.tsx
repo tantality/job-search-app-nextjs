@@ -13,7 +13,7 @@ import { calculatePageCount } from '@/utils/calculate-page-count';
 import { initialData } from '@/contexts/vacancy-filter/initial-data';
 import { Container } from '@/components/container';
 import { NoVacanciesScreen } from '@/components/no-vacancies-screen';
-import { StyledMainContent } from './styled';
+import { StyledMainContent } from '@/styles/pages/vacancies/index-styled';
 
 export default function VacanciesPage() {
   const { vacancyFilter, setVacancyFilter } = useContext(VacancyFilterContext) as VacancyFilterContextType;
@@ -29,7 +29,7 @@ export default function VacanciesPage() {
   function resetFiltersToInitialData(): void {
     setVacancyFilter(initialData);
     setLocalVacancyFilter(initialData);
-  };
+  }
 
   const handleSubmitButtonClick = (e: MouseEvent<HTMLButtonElement>): void => {
     e.stopPropagation();

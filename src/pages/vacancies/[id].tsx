@@ -5,7 +5,7 @@ import { useVacancy } from '@/hooks/useVacancy';
 import { VacancyCard } from '@/components/vacancy-card';
 import { SIZE } from '@/constants';
 import { VacancyDescription } from '@/components/vacancy-description';
-import { StyledContainer, StyledMainContent } from './styled';
+import { StyledMainContent, StyledContainer } from '@/styles/pages/vacancies/id-styled';
 
 export default function VacancyPage() {
   const { query } = useRouter();
