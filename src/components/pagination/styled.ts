@@ -7,8 +7,8 @@ export const StyledPagination = styled(Pagination)`
     color: #232134;
   }
 
-  button:first-child:not([data-disabled]),
-  button:last-child:not([data-disabled]) {
+  button:first-of-type:not([data-disabled]),
+  button:last-of-type:not([data-disabled]) {
     color: #7b7c88;
   }
 
@@ -27,5 +27,14 @@ export const StyledPagination = styled(Pagination)`
     border: 1px solid #eaebed;
     background-color: #fff;
     color: #d5d6dc;
+  }
+
+  @media (max-width: 420px) {
+    .mantine-Pagination-control {
+      min-width: 30px;
+      padding: 0 4px;
+      height: 30px;
+      font-size: 14px;
+    }
   }
 `;
