@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import Link from 'next/link';
-import styled, { LightTheme, ThemedStyledProps } from 'styled-components';
+import styled from 'styled-components';
 
 export const StyledNavItem = styled.li`
   height: 100%;
@@ -10,8 +10,6 @@ export const StyledNavItem = styled.li`
 interface StyledLinkProps {
   $isActive: boolean;
 }
-
-export type MyThemeProps<P> = ThemedStyledProps<P, LightTheme>;
 
 export const StyledLink = styled(Link)<StyledLinkProps>`
   font-style: normal;
