@@ -9,7 +9,7 @@ export const useVacanciesByIds = (ids: number[], options?: UseQueryOptions): Use
     staleTime: Infinity,
     keepPreviousData: true,
     ...options,
-  });
+  }) as UseQueryResult<VacancyList>;
 
   return data;
 };
