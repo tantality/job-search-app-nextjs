@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/indent */
 import styled from 'styled-components';
 import Link from 'next/link';
 import { SIZE } from '@/constants';
@@ -11,12 +12,22 @@ export const StyledVacancyCard = styled.div`
   padding: 23px;
   height: auto;
   width: 100%;
+
+  @media (max-width: 950px) {
+    padding: 20px;
+  }
 `;
 
 export const StyledContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr max-content;
   column-gap: 20px;
+
+  @media (max-width: 450px) {
+    button {
+      align-self: center;
+    }
+  }
 `;
 
 interface StyledContentProps {
@@ -27,13 +38,31 @@ export const StyledContent = styled.div<StyledContentProps>`
   display: flex;
   flex-direction: column;
   row-gap: ${({ cardSize }) => {
-  switch (cardSize) {
-  case SIZE.MD:
-    return '12px';
-  case SIZE.LG:
-    return '16px';
+    switch (cardSize) {
+      case SIZE.MD:
+        return '12px';
+      case SIZE.LG:
+        return '16px';
+    }
+  }};
+
+  @media (max-width: 950px) {
+    row-gap: ${({ cardSize }) => {
+      switch (cardSize) {
+        case SIZE.LG:
+          return '14px';
+      }
+    }};
   }
-}};
+
+  @media (max-width: 700px) {
+    row-gap: ${({ cardSize }) => {
+      switch (cardSize) {
+        case SIZE.LG:
+          return '12px';
+      }
+    }};
+  }
 `;
 
 StyledContent.defaultProps = {
@@ -44,6 +73,8 @@ export const StyledDescription = styled.div`
   display: flex;
   column-gap: 12px;
   align-items: center;
+  row-gap: 4px;
+  flex-wrap: wrap;
 `;
 
 export const StyledLocation = styled.div`

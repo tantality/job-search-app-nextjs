@@ -8,7 +8,15 @@ import { FavoriteButton } from '../favorite-button';
 import { Splitter } from '../splitter';
 import { Heading, HeadingProps } from '../heading';
 import { Text } from '../text';
-import { StyledContainer, StyledContent, StyledVacancyCard, StyledLocation, StyledDescription, StyledLocationIcon, StyledLink } from './styled';
+import {
+  StyledContainer,
+  StyledContent,
+  StyledVacancyCard,
+  StyledLocation,
+  StyledDescription,
+  StyledLocationIcon,
+  StyledLink,
+} from './styled';
 import { formSalaryOutput } from './utils/form-salary-output';
 
 export interface VacancyCardProps {
