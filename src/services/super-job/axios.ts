@@ -6,6 +6,5 @@ export const axiosInstance = axios.create({
   headers: {
     'x-secret-key': process.env.NEXT_PUBLIC_X_SECRET_KEY,
     'X-Api-App-Id': process.env.NEXT_PUBLIC_X_API_APP_ID,
-    'X-app': '31313133',
   },
 });
