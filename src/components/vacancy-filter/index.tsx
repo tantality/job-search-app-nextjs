@@ -7,9 +7,8 @@ import { NamedFormGroup } from '../named-form-group';
 import { Dropdown } from '../dropdown';
 import { NumberInput } from '../number-input';
 import { Button } from '../button';
-import { Heading } from '../heading';
 import { ResetButton } from '../reset-button';
-import { StyledContent, StyledVacancyFilter, StyledWrapper } from './styled';
+import { StyledContent, StyledHeading, StyledVacancyFilter, StyledWrapper } from './styled';
 import { transformIndustriesToDropdownItems } from './utils';
 
 interface VacancyFilterProps {
@@ -51,7 +50,7 @@ export const VacancyFilter: FC<VacancyFilterProps> = ({ setPage, setLocalVacancy
   return (
     <StyledVacancyFilter>
       <StyledWrapper>
-        <Heading order={HEADING_ORDER.H2}>Фильтры</Heading>
+        <StyledHeading order={HEADING_ORDER.H2}>Фильтры</StyledHeading>
         <ResetButton onClick={handleResetButtonClick}>Сбросить все</ResetButton>
       </StyledWrapper>
       <StyledContent>
