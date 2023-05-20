@@ -3,7 +3,7 @@ import { SIZE } from '@/constants';
 import { Text } from '../text';
 import { Button } from '../button';
 import { BUTTON_IMPORTANCE } from '../button/constants';
-import { StyledImage, StyledVacanciesEmptyState } from './styled';
+import { StyledImage, StyledMessage } from './styled';
 
 interface MessageProps {
   buttonProps?: ButtonProps;
@@ -17,7 +17,7 @@ interface ButtonProps {
 
 export const Message: FC<MessageProps> = ({ buttonProps, text }) => {
   return (
-    <StyledVacanciesEmptyState>
+    <StyledMessage>
       <StyledImage src="/assets/images/search-man.svg" alt="search-man" width={240} height={230} />
       <Text weight={700} lineHeight="29px" size={SIZE.XXL} align="center">
         {text}
@@ -27,6 +27,6 @@ export const Message: FC<MessageProps> = ({ buttonProps, text }) => {
           {buttonProps.text}
         </Button>
       )}
-    </StyledVacanciesEmptyState>
+    </StyledMessage>
   );
 };

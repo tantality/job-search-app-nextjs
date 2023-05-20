@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import styled from 'styled-components';
 
-export const StyledVacanciesEmptyState = styled.div`
+export const StyledMessage = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 32px;
