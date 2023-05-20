@@ -6,6 +6,7 @@ import { StyledText } from './styled';
 export interface TextProps {
   weight?: FontWeight;
   size?: SIZE | string;
+  align?: string;
   lineHeight?: string;
   children: ReactNode;
 }
