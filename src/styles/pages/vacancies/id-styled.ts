@@ -1,11 +1,15 @@
 import styled from 'styled-components';
 
-export const StyledContainer = styled.div`
+interface StyledContainerProps {
+  justifyContent: string;
+}
+
+export const StyledContainer = styled.div<StyledContainerProps>`
   height: 100%;
   display: flex;
   flex-direction: column;
   row-gap: 20px;
-  justify-content: center;
+  justify-content: ${({ justifyContent }) => justifyContent};
   align-items: center;
 `;
 

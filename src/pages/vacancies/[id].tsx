@@ -17,7 +17,7 @@ export default function VacancyPage() {
   return (
     <Container maxWidth={773}>
       <StyledMainContent>
-        <StyledContainer>
+        <StyledContainer justifyContent={isFetching ? 'center' : 'start'}>
           {isSuccess && !isFetching ? (
             <>
               <VacancyCard size={SIZE.LG} vacancy={vacancy} />
