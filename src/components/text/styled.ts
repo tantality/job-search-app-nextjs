@@ -13,9 +13,18 @@ export const StyledText = styled(Text, { shouldForwardProp: (prop) => prop !== '
   line-height: ${({ lineHeight }): string => (lineHeight ? lineHeight : '20px;')};
   color: #232134;
 
+  ${({ size }) => {
+    switch (size) {
+      case SIZE.XXL:
+        return 'font-size: 24px;';
+    }
+  }}
+
   @media (max-width: 950px) {
     ${({ size }) => {
       switch (size) {
+        case SIZE.XXL:
+          return 'font-size: 22px;';
         case SIZE.LG:
           return 'font-size: 16px;';
         case SIZE.MD:
@@ -27,6 +36,8 @@ export const StyledText = styled(Text, { shouldForwardProp: (prop) => prop !== '
   @media (max-width: 450px) {
     ${({ size }) => {
       switch (size) {
+        case SIZE.XXL:
+          return 'font-size: 19px;';
         case SIZE.LG:
           return 'font-size: 15px;';
       }

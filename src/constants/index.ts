@@ -4,6 +4,7 @@ export enum SIZE {
   MD = 'md',
   LG = 'lg',
   XL = 'xl',
+  XXL = 'xxl',
 }
 
 export enum HEADING_ORDER {
