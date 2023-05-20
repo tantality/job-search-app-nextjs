@@ -10,6 +10,7 @@ import { FavoriteVacanciesState } from '@/contexts/favorite-vacancies/types';
 import { Container } from '@/components/container';
 import { NoVacanciesScreen } from '@/components/no-vacancies-screen';
 import { StyledContainer } from '@/styles/pages/vacancies/favorites-styled';
+import { ErrorScreen } from '@/components/error-screen';
 
 export default function FavoritesPage() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -19,7 +20,11 @@ export default function FavoritesPage() {
 
   const idsChunkToFetch = getDataChunk(initialIds, ITEMS_PER_PAGE, currentPage);
   const options = { enabled: Boolean(initialIds.length) };
-  const { data: vacancyList, isFetching, isSuccess } = useVacanciesByIds(idsChunkToFetch, options);
+  const { data: vacancyList, isFetching, isSuccess, isError } = useVacanciesByIds(idsChunkToFetch, options);
+
+  if (isError) {
+    return <ErrorScreen />;
+  }
 
   const noVacancies = !isFetching && (!vacancyList || !initialIds.length || !vacancyList.total);
   if (noVacancies) {

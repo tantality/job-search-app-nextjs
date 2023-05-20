@@ -14,17 +14,13 @@ import { initialData } from '@/contexts/vacancy-filter/initial-data';
 import { Container } from '@/components/container';
 import { NoVacanciesScreen } from '@/components/no-vacancies-screen';
 import { StyledMainContent } from '@/styles/pages/vacancies/index-styled';
+import { ErrorScreen } from '@/components/error-screen';
 
 export default function VacanciesPage() {
   const { vacancyFilter, setVacancyFilter } = useContext(VacancyFilterContext) as VacancyFilterContextType;
   const [localVacancyFilter, setLocalVacancyFilter] = useState<VacancyFilterType>(initialData);
   const [page, setPage] = useState<number>(1);
-  const { data: vacancyList, isFetching } = useVacanciesByFilter(page, ITEMS_PER_PAGE, vacancyFilter);
-
-  const noVacancies = !isFetching && (!vacancyList || !vacancyList.objects.length);
-  if (noVacancies) {
-    return <NoVacanciesScreen onButtonClick={resetFiltersToInitialData} />;
-  }
+  const { data: vacancyList, isFetching, isError } = useVacanciesByFilter(page, ITEMS_PER_PAGE, vacancyFilter);
 
   function resetFiltersToInitialData(): void {
     setVacancyFilter(initialData);
@@ -41,6 +37,15 @@ export default function VacanciesPage() {
     const value = e.currentTarget.value;
     setLocalVacancyFilter((prev) => ({ ...prev, keyword: value }));
   };
+
+  if (isError) {
+    return <ErrorScreen />;
+  }
+
+  const noVacancies = !isFetching && (!vacancyList || !vacancyList.objects.length);
+  if (noVacancies) {
+    return <NoVacanciesScreen onButtonClick={resetFiltersToInitialData} />;
+  }
 
   return (
     <Container>

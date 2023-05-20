@@ -6,13 +6,19 @@ import { VacancyCard } from '@/components/vacancy-card';
 import { SIZE } from '@/constants';
 import { VacancyDescription } from '@/components/vacancy-description';
 import { StyledMainContent, StyledContainer } from '@/styles/pages/vacancies/id-styled';
+import { ErrorScreen } from '@/components/error-screen';
 
 export default function VacancyPage() {
   const { query } = useRouter();
   const vacancyId = Number(query['id']);
   const isValidVacancyId = Boolean(Number(vacancyId));
 
-  const { data: vacancy, isFetching, isSuccess } = useVacancy(vacancyId, { enabled: isValidVacancyId });
+  const { data: vacancy, isFetching, isSuccess, isError } = useVacancy(vacancyId, { enabled: isValidVacancyId });
+
+  if (!isValidVacancyId || isError) {
+    const props = isValidVacancyId ? {} : { messageText: 'Вакансии не существует' };
+    return <ErrorScreen {...props} />;
+  }
 
   return (
     <Container maxWidth={773}>
