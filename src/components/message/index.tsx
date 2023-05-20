@@ -19,7 +19,7 @@ export const Message: FC<MessageProps> = ({ buttonProps, text }) => {
   return (
     <StyledVacanciesEmptyState>
       <StyledImage src="/assets/images/search-man.svg" alt="search-man" width={240} height={230} />
-      <Text weight={700} lineHeight="29px" size="24px">
+      <Text weight={700} lineHeight="29px" size={SIZE.XXL} align="center">
         {text}
       </Text>
       {buttonProps && (
