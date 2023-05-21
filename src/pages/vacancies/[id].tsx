@@ -10,12 +10,13 @@ import { ErrorScreen } from '@/components/error-screen';
 
 export default function VacancyPage() {
   const { query } = useRouter();
-  const vacancyId = Number(query['id']);
-  const isValidVacancyId = Boolean(Number(vacancyId));
+  const vacancyIdParam = query['id'];
+  const vacancyId = Number(vacancyIdParam);
+  const isValidVacancyId = Boolean(vacancyId);
 
   const { data: vacancy, isFetching, isSuccess, isError } = useVacancy(vacancyId, { enabled: isValidVacancyId });
 
-  if (!isValidVacancyId || isError) {
+  if ((vacancyIdParam && !isValidVacancyId) || isError) {
     const props = isValidVacancyId ? {} : { messageText: 'Вакансии не существует' };
     return <ErrorScreen {...props} />;
   }
