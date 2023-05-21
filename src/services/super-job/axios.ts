@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const axiosInstance = axios.create({
-  baseURL: 'https://startup-summer-proxy-production.up.railway.app/2.0',
+  baseURL: 'https://startup-summer-proxy-production.up.railway.app/2.0/',
   timeout: 2000,
   headers: {
     'x-secret-key': process.env.NEXT_PUBLIC_X_SECRET_KEY,
