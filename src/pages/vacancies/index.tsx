@@ -20,7 +20,7 @@ export default function VacanciesPage() {
   const [vacancyFilterToFetch, setVacancyFilterToFetch] = useState<VacancyFilterType>(INITIAL_DATA);
   const [page, setPage] = useState<number>(1);
 
-  const { data: vacancyList, isFetching, isError } = useVacanciesByFilter(page, ITEMS_PER_PAGE, vacancyFilterToFetch);
+  const { data: vacancyList, isFetching, isError, isSuccess } = useVacanciesByFilter(page, ITEMS_PER_PAGE, vacancyFilterToFetch);
 
   function resetFiltersToInitialData(): void {
     setVacancyFilterToFetch(INITIAL_DATA);
@@ -66,8 +66,8 @@ export default function VacanciesPage() {
             onChange={handleSearchInputChange}
           />
           <StyledMainContent>
-            {vacancyList && vacancyList.objects && !isFetching ? <VacancyList vacancies={vacancyList.objects} /> : <Loader />}
-            {vacancyList && <Pagination total={calculatePageCount(vacancyList.total, ITEMS_PER_PAGE)} value={page} onChange={setPage} />}
+            {isSuccess && !isFetching ? <VacancyList vacancies={vacancyList.objects} /> : <Loader />}
+            {isSuccess && <Pagination total={calculatePageCount(vacancyList.total, ITEMS_PER_PAGE)} value={page} onChange={setPage} />}
           </StyledMainContent>
         </div>
       </TwoColumnLayout>
