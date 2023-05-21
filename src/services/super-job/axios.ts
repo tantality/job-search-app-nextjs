@@ -6,5 +6,6 @@ export const axiosInstance = axios.create({
   headers: {
     'x-secret-key': process.env.NEXT_PUBLIC_X_SECRET_KEY,
     'X-Api-App-Id': process.env.NEXT_PUBLIC_X_API_APP_ID,
+    Authorization: `Bearer ${process.env.NEXT_PUBLIC_ACCESS_TOKEN}`,
   },
 });
