@@ -19,7 +19,7 @@ export const Dropdown: FC<DropdownProps> = ({ placeholder, data, onChange, value
     <StyledDropdown
       value={value}
       data={data}
-      placeholder={placeholder ? placeholder : ''}
+      placeholder={placeholder ?? ''}
       size={SIZE.MD}
       styles={{ rightSection: { pointerEvents: 'none' } }}
       rightSection={<StyledDownArrowIcon />}

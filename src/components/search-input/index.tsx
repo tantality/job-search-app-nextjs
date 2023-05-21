@@ -22,7 +22,7 @@ export const SearchInput: FC<SearchInputProps> = ({ placeholder, value, onSubmit
   return (
     <StyledSearchInput
       icon={searchIcon}
-      placeholder={placeholder ? placeholder : ''}
+      placeholder={placeholder ?? ''}
       size={SIZE.LG}
       rightSection={searchButton}
       value={value}
