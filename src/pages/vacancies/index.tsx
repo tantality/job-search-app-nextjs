@@ -47,6 +47,8 @@ export default function VacanciesPage() {
     return <NoVacanciesScreen onButtonClick={resetFiltersToInitialData} />;
   }
 
+  const pageCount = isSuccess ? calculatePageCount(vacancyList.total, ITEMS_PER_PAGE) : 0;
+
   return (
     <Container>
       <TwoColumnLayout>
@@ -67,7 +69,7 @@ export default function VacanciesPage() {
           />
           <StyledMainContent>
             {isSuccess && !isFetching ? <VacancyList vacancies={vacancyList.objects} /> : <Loader />}
-            {isSuccess && <Pagination total={calculatePageCount(vacancyList.total, ITEMS_PER_PAGE)} value={page} onChange={setPage} />}
+            {isSuccess && pageCount > 1 && <Pagination total={pageCount} value={page} onChange={setPage} />}
           </StyledMainContent>
         </div>
       </TwoColumnLayout>
