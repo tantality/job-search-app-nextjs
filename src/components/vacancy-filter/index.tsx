@@ -11,25 +11,26 @@ import { StyledContent, StyledHeading, StyledVacancyFilter, StyledWrapper } from
 import { transformIndustriesToDropdownItems } from './utils';
 
 interface VacancyFilterProps {
-  setPage: Dispatch<SetStateAction<number>>;
+  setCurrentPage: Dispatch<SetStateAction<number>>;
   localVacancyFilter: VacancyFilterType;
   setLocalVacancyFilter: Dispatch<SetStateAction<VacancyFilterType>>;
   setVacancyFilterToFetch: Dispatch<SetStateAction<VacancyFilterType>>;
 }
 
-export const VacancyFilter: FC<VacancyFilterProps> = ({ setPage, setLocalVacancyFilter, localVacancyFilter, setVacancyFilterToFetch }) => {
+export const VacancyFilter: FC<VacancyFilterProps> = (props) => {
+  const { setCurrentPage, setLocalVacancyFilter, localVacancyFilter, setVacancyFilterToFetch } = props;
   const { data: industries } = useIndustries();
 
   const handleResetButtonClick = (e: MouseEvent<HTMLButtonElement>): void => {
     e.stopPropagation();
-    setPage(1);
+    setCurrentPage(1);
     setVacancyFilterToFetch((prev) => ({ ...INITIAL_DATA, keyword: prev.keyword }));
     setLocalVacancyFilter((prev) => ({ ...INITIAL_DATA, keyword: prev.keyword }));
   };
 
   const handleSubmitButtonClick = (e: MouseEvent<HTMLButtonElement>): void => {
     e.stopPropagation();
-    setPage(1);
+    setCurrentPage(1);
     setVacancyFilterToFetch(localVacancyFilter);
   };
 

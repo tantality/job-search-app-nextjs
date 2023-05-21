@@ -18,9 +18,9 @@ import { VacancyFilterType } from '@/types';
 export default function VacanciesPage() {
   const [localVacancyFilter, setLocalVacancyFilter] = useState<VacancyFilterType>(INITIAL_DATA);
   const [vacancyFilterToFetch, setVacancyFilterToFetch] = useState<VacancyFilterType>(INITIAL_DATA);
-  const [page, setPage] = useState<number>(1);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
-  const { data: vacancyList, isFetching, isError, isSuccess } = useVacanciesByFilter(page, ITEMS_PER_PAGE, vacancyFilterToFetch);
+  const { data: vacancyList, isFetching, isError, isSuccess } = useVacanciesByFilter(currentPage, ITEMS_PER_PAGE, vacancyFilterToFetch);
 
   function resetFiltersToInitialData(): void {
     setVacancyFilterToFetch(INITIAL_DATA);
@@ -29,7 +29,7 @@ export default function VacanciesPage() {
 
   const handleSubmitButtonClick = (e: MouseEvent<HTMLButtonElement>): void => {
     e.stopPropagation();
-    setPage(1);
+    setCurrentPage(1);
     setVacancyFilterToFetch(localVacancyFilter);
   };
 
@@ -54,7 +54,7 @@ export default function VacanciesPage() {
       <TwoColumnLayout>
         <Sidebar>
           <VacancyFilter
-            setPage={setPage}
+            setCurrentPage={setCurrentPage}
             localVacancyFilter={localVacancyFilter}
             setLocalVacancyFilter={setLocalVacancyFilter}
             setVacancyFilterToFetch={setVacancyFilterToFetch}
@@ -69,7 +69,7 @@ export default function VacanciesPage() {
           />
           <StyledMainContent>
             {isSuccess && !isFetching ? <VacancyList vacancies={vacancyList.objects} /> : <Loader />}
-            {isSuccess && pageCount > 1 && <Pagination total={pageCount} value={page} onChange={setPage} />}
+            {isSuccess && pageCount > 1 && <Pagination total={pageCount} value={currentPage} onChange={setCurrentPage} />}
           </StyledMainContent>
         </div>
       </TwoColumnLayout>
