@@ -7,9 +7,22 @@ export const StyledMessage = styled.div`
   row-gap: 32px;
   justify-content: center;
   align-items: center;
+  max-width: 500px;
+
+  button {
+    min-width: 164px;
+  }
 
   @media (max-width: 900px) {
     row-gap: 27px;
+  }
+
+  @media (max-width: 800px) {
+    max-width: 400px;
+  }
+
+  @media (max-width: 450px) {
+    max-width: 300px;
   }
 `;
 
