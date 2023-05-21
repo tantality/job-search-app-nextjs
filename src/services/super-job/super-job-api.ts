@@ -15,7 +15,7 @@ class SuperJobApi {
         payment_to: paymentTo,
         payment_from: paymentFrom,
         keyword,
-        industryId,
+        catalogues: industryId,
       },
     });
 
