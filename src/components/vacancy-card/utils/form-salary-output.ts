@@ -1,19 +1,24 @@
 export const formSalaryOutput = (paymentFrom: number, paymentTo: number, currency: string): string => {
-  if (paymentFrom && paymentTo) {
-    if (paymentFrom === paymentTo) {
-      return `з/п ${paymentFrom} ${currency}`;
-    }
+  const baseOutput = 'з/п';
 
-    return `з/п ${paymentFrom} - ${paymentTo} ${currency}`;
+  const isSalaryRange = paymentFrom && paymentTo;
+  const areSalaryEdgesEqual = paymentFrom === paymentTo;
+
+  if (isSalaryRange && areSalaryEdgesEqual) {
+    return `${baseOutput} ${paymentFrom} ${currency}`;
+  }
+
+  if (isSalaryRange) {
+    return `${baseOutput} ${paymentFrom} - ${paymentTo} ${currency}`;
   }
 
   if (paymentFrom) {
-    return `з/п от ${paymentFrom} ${currency}`;
+    return `${baseOutput} от ${paymentFrom} ${currency}`;
   }
 
   if (paymentTo) {
-    return `з/п до ${paymentTo} ${currency}`;
+    return `${baseOutput} до ${paymentTo} ${currency}`;
   }
 
-  return 'з/п не определена';
+  return `${baseOutput} не указана`;
 };
