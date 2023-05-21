@@ -1,5 +1,9 @@
 export const formSalaryOutput = (paymentFrom: number, paymentTo: number, currency: string): string => {
   if (paymentFrom && paymentTo) {
+    if (paymentFrom === paymentTo) {
+      return `з/п ${paymentFrom} ${currency}`;
+    }
+
     return `з/п ${paymentFrom} - ${paymentTo} ${currency}`;
   }
 
