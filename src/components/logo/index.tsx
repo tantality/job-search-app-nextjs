@@ -1,10 +1,11 @@
 import { FC } from 'react';
-import { StyledLogo, StyledLogoText, StyledSvg } from './styled';
+import LogotypeSvg from '../../../public/logo.svg';
+import { StyledLogo, StyledLogoText } from './styled';
 
 export const Logo: FC = () => {
   return (
     <StyledLogo>
-      <StyledSvg />
+      <LogotypeSvg />
       <StyledLogoText>Jobored</StyledLogoText>
     </StyledLogo>
   );
