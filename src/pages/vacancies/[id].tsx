@@ -14,7 +14,7 @@ export default function VacancyPage() {
   const vacancyId = Number(vacancyIdParam);
   const isValidVacancyId = Boolean(vacancyId);
 
-  const { data: vacancy, isFetching, isSuccess, isError } = useVacancy(vacancyId, { enabled: isValidVacancyId });
+  const { data: vacancy, isFetching, isSuccess, isError, isLoading } = useVacancy(vacancyId, { enabled: isValidVacancyId });
 
   if ((vacancyIdParam && !isValidVacancyId) || isError) {
     const props = isValidVacancyId ? {} : { messageText: 'Вакансии не существует' };
@@ -24,7 +24,7 @@ export default function VacancyPage() {
   return (
     <Container maxWidth={773}>
       <StyledMainContent>
-        <StyledContainer justifyContent={isFetching ? 'center' : 'start'}>
+        <StyledContainer justifyContent={isLoading ? 'center' : 'start'}>
           {isSuccess && !isFetching ? (
             <>
               <VacancyCard size={SIZE.LG} vacancy={vacancy} />
