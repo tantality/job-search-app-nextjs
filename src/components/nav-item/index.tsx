@@ -12,8 +12,14 @@ interface NavItemProps {
 }
 
 export const NavItem: FC<NavItemProps> = ({ item }) => {
-  const { pathname } = useRouter();
-  const isActive = pathname === item.path ? true : false;
+  const router = useRouter();
+  let isActive;
+
+  if (item.path === '/vacancies' && router.pathname === '/vacancies/[id]') {
+    isActive = true;
+  } else {
+    isActive = router.pathname === item.path;
+  }
 
   return (
     <StyledNavItem>
