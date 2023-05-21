@@ -10,6 +10,7 @@ class SuperJobApi {
 
     const res = await axiosInstance.get<VacancyList>('vacancies/', {
       params: {
+        published: 1,
         count: itemsCount,
         page: page - 1,
         payment_to: paymentTo,
