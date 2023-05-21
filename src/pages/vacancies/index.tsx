@@ -1,36 +1,36 @@
-import { ChangeEvent, MouseEvent, useContext, useState } from 'react';
+import { ChangeEvent, MouseEvent, useState } from 'react';
 import { Loader } from '@mantine/core';
 import { TwoColumnLayout } from '@/components/layouts/two-column-layout';
 import { Sidebar } from '@/components/sidebar';
 import { SearchInput } from '@/components/search-input';
 import { VacancyList } from '@/components/vacancy-list';
-import { VacancyFilterContext, VacancyFilterContextType, VacancyFilterType } from '@/contexts/vacancy-filter/context';
 import { VacancyFilter } from '@/components/vacancy-filter';
-import { ITEMS_PER_PAGE } from '@/constants';
+import { ITEMS_PER_PAGE, VACANCY_FILTER_INITIAL_DATA as INITIAL_DATA } from '@/constants';
 import { useVacanciesByFilter } from '@/hooks/useVacanciesByFilter';
 import { Pagination } from '@/components/pagination';
 import { calculatePageCount } from '@/utils/calculate-page-count';
-import { initialData } from '@/contexts/vacancy-filter/initial-data';
 import { Container } from '@/components/container';
 import { NoVacanciesScreen } from '@/components/no-vacancies-screen';
 import { StyledMainContent } from '@/styles/pages/vacancies/index-styled';
 import { ErrorScreen } from '@/components/error-screen';
+import { VacancyFilterType } from '@/types';
 
 export default function VacanciesPage() {
-  const { vacancyFilter, setVacancyFilter } = useContext(VacancyFilterContext) as VacancyFilterContextType;
-  const [localVacancyFilter, setLocalVacancyFilter] = useState<VacancyFilterType>(initialData);
+  const [localVacancyFilter, setLocalVacancyFilter] = useState<VacancyFilterType>(INITIAL_DATA);
+  const [vacancyFilterToFetch, setVacancyFilterToFetch] = useState<VacancyFilterType>(INITIAL_DATA);
   const [page, setPage] = useState<number>(1);
-  const { data: vacancyList, isFetching, isError } = useVacanciesByFilter(page, ITEMS_PER_PAGE, vacancyFilter);
+
+  const { data: vacancyList, isFetching, isError } = useVacanciesByFilter(page, ITEMS_PER_PAGE, vacancyFilterToFetch);
 
   function resetFiltersToInitialData(): void {
-    setVacancyFilter(initialData);
-    setLocalVacancyFilter(initialData);
+    setVacancyFilterToFetch(INITIAL_DATA);
+    setLocalVacancyFilter(INITIAL_DATA);
   }
 
   const handleSubmitButtonClick = (e: MouseEvent<HTMLButtonElement>): void => {
     e.stopPropagation();
     setPage(1);
-    setVacancyFilter(localVacancyFilter);
+    setVacancyFilterToFetch(localVacancyFilter);
   };
 
   const handleSearchInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -51,7 +51,12 @@ export default function VacanciesPage() {
     <Container>
       <TwoColumnLayout>
         <Sidebar>
-          <VacancyFilter setPage={setPage} localVacancyFilter={localVacancyFilter} setLocalVacancyFilter={setLocalVacancyFilter} />
+          <VacancyFilter
+            setPage={setPage}
+            localVacancyFilter={localVacancyFilter}
+            setLocalVacancyFilter={setLocalVacancyFilter}
+            setVacancyFilterToFetch={setVacancyFilterToFetch}
+          />
         </Sidebar>
         <div>
           <SearchInput

@@ -1,5 +1,5 @@
 /* eslint-disable import/no-anonymous-default-export */
-import { VacancyFilterType } from '@/contexts/vacancy-filter/context';
+import { VacancyFilterType } from '@/types';
 import { Industry } from '@/types/super-job/industries';
 import { Vacancy, VacancyList } from '@/types/super-job/vacancies';
 import { axiosInstance } from './axios';

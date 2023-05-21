@@ -1,8 +1,7 @@
-import { Dispatch, FC, MouseEvent, SetStateAction, useContext } from 'react';
-import { HEADING_ORDER } from '@/constants';
-import { VacancyFilterContext, VacancyFilterContextType, VacancyFilterType } from '@/contexts/vacancy-filter/context';
-import { initialData } from '@/contexts/vacancy-filter/initial-data';
+import { Dispatch, FC, MouseEvent, SetStateAction } from 'react';
+import { HEADING_ORDER, VACANCY_FILTER_INITIAL_DATA as INITIAL_DATA } from '@/constants';
 import { useIndustries } from '@/hooks/useIndustries';
+import { VacancyFilterType } from '@/types';
 import { NamedFormGroup } from '../named-form-group';
 import { Dropdown } from '../dropdown';
 import { NumberInput } from '../number-input';
@@ -15,24 +14,23 @@ interface VacancyFilterProps {
   setPage: Dispatch<SetStateAction<number>>;
   localVacancyFilter: VacancyFilterType;
   setLocalVacancyFilter: Dispatch<SetStateAction<VacancyFilterType>>;
+  setVacancyFilterToFetch: Dispatch<SetStateAction<VacancyFilterType>>;
 }
 
-export const VacancyFilter: FC<VacancyFilterProps> = ({ setPage, setLocalVacancyFilter, localVacancyFilter }) => {
-  const { setVacancyFilter } = useContext(VacancyFilterContext) as VacancyFilterContextType;
-
+export const VacancyFilter: FC<VacancyFilterProps> = ({ setPage, setLocalVacancyFilter, localVacancyFilter, setVacancyFilterToFetch }) => {
   const { data: industries } = useIndustries();
 
   const handleResetButtonClick = (e: MouseEvent<HTMLButtonElement>): void => {
     e.stopPropagation();
     setPage(1);
-    setVacancyFilter((prev) => ({ ...initialData, keyword: prev.keyword }));
-    setLocalVacancyFilter((prev) => ({ ...initialData, keyword: prev.keyword }));
+    setVacancyFilterToFetch((prev) => ({ ...INITIAL_DATA, keyword: prev.keyword }));
+    setLocalVacancyFilter((prev) => ({ ...INITIAL_DATA, keyword: prev.keyword }));
   };
 
   const handleSubmitButtonClick = (e: MouseEvent<HTMLButtonElement>): void => {
     e.stopPropagation();
     setPage(1);
-    setVacancyFilter(localVacancyFilter);
+    setVacancyFilterToFetch(localVacancyFilter);
   };
 
   const handleDropdownChange = (value: string): void => {
