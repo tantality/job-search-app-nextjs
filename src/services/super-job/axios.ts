@@ -1,7 +1,5 @@
-import axios, { AxiosRequestConfig, InternalAxiosRequestConfig, isAxiosError } from 'axios';
-import { LOCAL_STORAGE_KEY } from '@/constants';
-import { getItemFromLocalStorage, removeItemFromLocalStorage, setItemToLocalStorage } from '@/utils';
-import superJobApi from './super-job-api';
+import axios from 'axios';
+import { onFulfilledRequest, onRejectedResponse } from './interceptor-handlers';
 
 export const axiosInstance = axios.create({
   baseURL: 'https://startup-summer-proxy-production.up.railway.app/2.0/',
@@ -13,90 +11,4 @@ export const axiosInstance = axios.create({
 });
 
 axiosInstance.interceptors.request.use(onFulfilledRequest);
-axiosInstance.interceptors.response.use((res) => res, onResponseError);
-
-const pathsWithoutAuth = ['oauth2/password/', 'oauth2/refresh_token/', 'catalogues/'];
-
-function onFulfilledRequest(
-  config: InternalAxiosRequestConfig<any>,
-): InternalAxiosRequestConfig<any> | Promise<InternalAxiosRequestConfig<any>> {
-  const accessToken = getItemFromLocalStorage(LOCAL_STORAGE_KEY.ACCESS_TOKEN);
-  const url = config.url as string;
-
-  if (!pathsWithoutAuth.includes(url)) {
-    config.headers['Authorization'] = `Bearer ${accessToken}`;
-  }
-
-  return config;
-}
-
-async function onResponseError(err: any): Promise<any> {
-  const res = await handleResponseError(err);
-  return res;
-}
-
-interface ExtendedAxiosConfig extends AxiosRequestConfig {
-  retry: boolean;
-}
-
-const handleResponseError = async (err: any): Promise<any> => {
-  if (isAxiosError(err)) {
-    const requestConfig = err.config as ExtendedAxiosConfig;
-    const errStatus = err.response?.status;
-
-    if (errStatus && requestConfig.retry) {
-      return Promise.reject(err);
-    }
-
-    switch (errStatus) {
-    case 401: {
-      const res = await handleUnauthorizedError(requestConfig);
-      return res;
-    }
-    case 410: {
-      const res = await handleExpiredTokenError(requestConfig);
-      return res;
-    }
-    }
-  }
-
-  return Promise.reject(err);
-};
-
-const handleUnauthorizedError = async (config: ExtendedAxiosConfig): Promise<any> => {
-  config.retry = true;
-
-  try {
-    const { access_token, refresh_token } = await superJobApi.getTokens();
-
-    setItemToLocalStorage(LOCAL_STORAGE_KEY.ACCESS_TOKEN, access_token);
-    setItemToLocalStorage(LOCAL_STORAGE_KEY.REFRESH_TOKEN, refresh_token);
-
-    return axiosInstance(config);
-  } catch (error) {
-    removeItemFromLocalStorage(LOCAL_STORAGE_KEY.ACCESS_TOKEN);
-    removeItemFromLocalStorage(LOCAL_STORAGE_KEY.REFRESH_TOKEN);
-
-    return Promise.reject(error);
-  }
-};
-
-const handleExpiredTokenError = async (config: ExtendedAxiosConfig): Promise<any> => {
-  config.retry = true;
-
-  try {
-    const refreshToken = getItemFromLocalStorage(LOCAL_STORAGE_KEY.REFRESH_TOKEN);
-    const refreshTokenAsString = String(refreshToken);
-    const { access_token, refresh_token } = await superJobApi.refreshTokens(refreshTokenAsString);
-
-    setItemToLocalStorage(LOCAL_STORAGE_KEY.ACCESS_TOKEN, access_token);
-    setItemToLocalStorage(LOCAL_STORAGE_KEY.REFRESH_TOKEN, refresh_token);
-
-    return axiosInstance(config);
-  } catch (error) {
-    removeItemFromLocalStorage(LOCAL_STORAGE_KEY.ACCESS_TOKEN);
-    removeItemFromLocalStorage(LOCAL_STORAGE_KEY.REFRESH_TOKEN);
-
-    return Promise.reject(error);
-  }
-};
+axiosInstance.interceptors.response.use((res) => res, onRejectedResponse);
