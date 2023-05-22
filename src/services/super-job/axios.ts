@@ -1,6 +1,7 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig, isAxiosError } from 'axios';
 import { LOCAL_STORAGE_KEY } from '@/constants';
-import { getItemFromLocalStorage } from '@/utils';
+import { getItemFromLocalStorage, removeItemFromLocalStorage, setItemToLocalStorage } from '@/utils';
+import superJobApi from './super-job-api';
 
 export const axiosInstance = axios.create({
   baseURL: 'https://startup-summer-proxy-production.up.railway.app/2.0/',
@@ -23,3 +24,41 @@ axiosInstance.interceptors.request.use((config) => {
 
   return config;
 });
+
+axiosInstance.interceptors.response.use((res) => res, onResponseError);
+
+async function onResponseError(err: any): Promise<any> {
+  const res = await handleResponseError(err);
+  return res;
+}
+
+const handleResponseError = async (err: any): Promise<any> => {
+  if (isAxiosError(err)) {
+    const originalConfig = err.config as AxiosRequestConfig;
+    const errStatus = err.response?.status;
+
+    switch (errStatus) {
+    case 401: {
+      const res = await handleUnauthorizedError(originalConfig);
+      return res;
+    }
+    }
+  }
+
+  return Promise.reject(err);
+};
+
+const handleUnauthorizedError = async (config: AxiosRequestConfig): Promise<any> => {
+  try {
+    const { access_token, refresh_token } = await superJobApi.getTokens();
+    setItemToLocalStorage(LOCAL_STORAGE_KEY.ACCESS_TOKEN, access_token);
+    setItemToLocalStorage(LOCAL_STORAGE_KEY.REFRESH_TOKEN, refresh_token);
+
+    return axiosInstance(config);
+  } catch (error) {
+    removeItemFromLocalStorage(LOCAL_STORAGE_KEY.ACCESS_TOKEN);
+    removeItemFromLocalStorage(LOCAL_STORAGE_KEY.REFRESH_TOKEN);
+
+    return Promise.reject(error);
+  }
+};
