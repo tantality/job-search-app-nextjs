@@ -8,15 +8,6 @@ interface NumberInputProps {
   onChange: (value: number | '') => void;
 }
 
-export const NumberInput: FC<NumberInputProps> = ({ placeholder, onChange, value }) => {
-  return (
-    <StyledNumberInput
-      placeholder={placeholder ?? ''}
-      size={SIZE.MD}
-      type="number"
-      min={1}
-      onChange={onChange}
-      value={value}
-    />
-  );
+export const NumberInput: FC<NumberInputProps> = ({ placeholder, ...props }) => {
+  return <StyledNumberInput placeholder={placeholder ?? ''} size={SIZE.MD} type="number" min={1} {...props} />;
 };

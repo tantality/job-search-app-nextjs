@@ -11,7 +11,7 @@ interface SearchInputProps {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const SearchInput: FC<SearchInputProps> = ({ placeholder, value, onSubmitButtonClick, onChange }) => {
+export const SearchInput: FC<SearchInputProps> = ({ placeholder, onSubmitButtonClick, ...props }) => {
   const searchButton = (
     <Button size={SIZE.SM} onClick={onSubmitButtonClick}>
       Поиск
@@ -25,8 +25,7 @@ export const SearchInput: FC<SearchInputProps> = ({ placeholder, value, onSubmit
       placeholder={placeholder ?? ''}
       size={SIZE.LG}
       rightSection={searchButton}
-      value={value}
-      onChange={onChange}
+      {...props}
     />
   );
 };

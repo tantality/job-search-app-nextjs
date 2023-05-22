@@ -14,17 +14,15 @@ export interface DropdownItem {
   label: string;
 }
 
-export const Dropdown: FC<DropdownProps> = ({ placeholder, data, onChange, value }) => {
+export const Dropdown: FC<DropdownProps> = ({ placeholder, ...props }) => {
   return (
     <StyledDropdown
-      value={value}
-      data={data}
       placeholder={placeholder ?? ''}
       size={SIZE.MD}
       styles={{ rightSection: { pointerEvents: 'none' } }}
       rightSection={<StyledDownArrowIcon />}
       rightSectionWidth={48}
-      onChange={onChange}
+      {...props}
     />
   );
 };

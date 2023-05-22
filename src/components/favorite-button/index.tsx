@@ -6,9 +6,10 @@ interface FavoriteButtonProps {
   onClick: (e: MouseEvent<HTMLButtonElement>) => void;
   isActive: boolean;
 }
-export const FavoriteButton: FC<FavoriteButtonProps> = ({ onClick, isActive }) => {
+
+export const FavoriteButton: FC<FavoriteButtonProps> = ({ isActive, ...props }) => {
   return (
-    <StyledFavoriteButton $isActive={isActive} onClick={onClick} size={24}>
+    <StyledFavoriteButton $isActive={isActive} size={24} {...props}>
       <StarIcon />
     </StyledFavoriteButton>
   );

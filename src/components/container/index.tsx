@@ -6,6 +6,6 @@ export interface ContainerProps {
   maxWidth?: number;
 }
 
-export const Container: FC<ContainerProps> = ({ children, maxWidth }) => {
-  return <StyledContainer maxWidth={maxWidth}>{children}</StyledContainer>;
+export const Container: FC<ContainerProps> = ({ children, ...props }) => {
+  return <StyledContainer {...props}>{children}</StyledContainer>;
 };
