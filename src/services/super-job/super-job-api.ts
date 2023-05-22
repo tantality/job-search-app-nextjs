@@ -57,6 +57,18 @@ class SuperJobApi {
 
     return res.data;
   }
+
+  async refreshTokens(refreshToken: string): Promise<Tokens> {
+    const res = await axiosInstance.get<Tokens>('oauth2/refresh_token/', {
+      params: {
+        refresh_token: refreshToken,
+        client_id: process.env.NEXT_PUBLIC_API_APP_ID,
+        client_secret: process.env.NEXT_PUBLIC_API_APP_SECRET_KEY,
+      },
+    });
+
+    return res.data;
+  }
 }
 
 export default new SuperJobApi();
