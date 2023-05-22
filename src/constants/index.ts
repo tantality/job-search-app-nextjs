@@ -23,6 +23,8 @@ export const ITEMS_PER_PAGE = 4;
 
 export enum LOCAL_STORAGE_KEY {
   FAVORITE_VACANCY_IDS = 'favorite-vacancy-ids',
+  ACCESS_TOKEN = 'access-token',
+  REFRESH_TOKEN = 'refresh-token',
 }
 
 export const VACANCY_FILTER_INITIAL_DATA: VacancyFilterType = { keyword: '', paymentFrom: '', paymentTo: '', industryId: 0 };
