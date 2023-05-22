@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig, isAxiosError } from 'axios';
+import axios, { AxiosRequestConfig, InternalAxiosRequestConfig, isAxiosError } from 'axios';
 import { LOCAL_STORAGE_KEY } from '@/constants';
 import { getItemFromLocalStorage, removeItemFromLocalStorage, setItemToLocalStorage } from '@/utils';
 import superJobApi from './super-job-api';
@@ -12,9 +12,14 @@ export const axiosInstance = axios.create({
   },
 });
 
+axiosInstance.interceptors.request.use(onFulfilledRequest);
+axiosInstance.interceptors.response.use((res) => res, onResponseError);
+
 const pathsWithoutAuth = ['oauth2/password/', 'oauth2/refresh_token/', 'catalogues/'];
 
-axiosInstance.interceptors.request.use((config) => {
+function onFulfilledRequest(
+  config: InternalAxiosRequestConfig<any>,
+): InternalAxiosRequestConfig<any> | Promise<InternalAxiosRequestConfig<any>> {
   const accessToken = getItemFromLocalStorage(LOCAL_STORAGE_KEY.ACCESS_TOKEN);
   const url = config.url as string;
 
@@ -23,9 +28,7 @@ axiosInstance.interceptors.request.use((config) => {
   }
 
   return config;
-});
-
-axiosInstance.interceptors.response.use((res) => res, onResponseError);
+}
 
 async function onResponseError(err: any): Promise<any> {
   const res = await handleResponseError(err);
