@@ -34,12 +34,16 @@ async function onResponseError(err: any): Promise<any> {
 
 const handleResponseError = async (err: any): Promise<any> => {
   if (isAxiosError(err)) {
-    const originalConfig = err.config as AxiosRequestConfig;
+    const requestConfig = err.config as AxiosRequestConfig;
     const errStatus = err.response?.status;
 
     switch (errStatus) {
     case 401: {
-      const res = await handleUnauthorizedError(originalConfig);
+      const res = await handleUnauthorizedError(requestConfig);
+      return res;
+    }
+    case 410: {
+      const res = await handleExpiredTokenError(requestConfig);
       return res;
     }
     }
@@ -51,6 +55,25 @@ const handleResponseError = async (err: any): Promise<any> => {
 const handleUnauthorizedError = async (config: AxiosRequestConfig): Promise<any> => {
   try {
     const { access_token, refresh_token } = await superJobApi.getTokens();
+
+    setItemToLocalStorage(LOCAL_STORAGE_KEY.ACCESS_TOKEN, access_token);
+    setItemToLocalStorage(LOCAL_STORAGE_KEY.REFRESH_TOKEN, refresh_token);
+
+    return axiosInstance(config);
+  } catch (error) {
+    removeItemFromLocalStorage(LOCAL_STORAGE_KEY.ACCESS_TOKEN);
+    removeItemFromLocalStorage(LOCAL_STORAGE_KEY.REFRESH_TOKEN);
+
+    return Promise.reject(error);
+  }
+};
+
+const handleExpiredTokenError = async (config: AxiosRequestConfig): Promise<any> => {
+  try {
+    const refreshToken = getItemFromLocalStorage(LOCAL_STORAGE_KEY.REFRESH_TOKEN);
+    const refreshTokenAsString = String(refreshToken);
+    const { access_token, refresh_token } = await superJobApi.refreshTokens(refreshTokenAsString);
+
     setItemToLocalStorage(LOCAL_STORAGE_KEY.ACCESS_TOKEN, access_token);
     setItemToLocalStorage(LOCAL_STORAGE_KEY.REFRESH_TOKEN, refresh_token);
 
