@@ -61,7 +61,7 @@ export const VacancyCard: FC<VacancyCardProps> = ({ size, headingProperties, vac
   };
 
   return (
-    <StyledVacancyCard>
+    <StyledVacancyCard data-elem={`vacancy-${vacancy.id}`}>
       <StyledContainer>
         <StyledContent cardSize={size}>
           {heading}
@@ -84,6 +84,7 @@ export const VacancyCard: FC<VacancyCardProps> = ({ size, headingProperties, vac
         <FavoriteButton
           isActive={isFavoriteButtonActive}
           onClick={(e: MouseEvent<HTMLButtonElement>): void => handleFavoriteButtonClick(e, vacancy.id)}
+          data-elem={`vacancy-${vacancy.id}-shortlist-button`}
         />
       </StyledContainer>
     </StyledVacancyCard>

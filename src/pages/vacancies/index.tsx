@@ -66,6 +66,7 @@ export default function VacanciesPage() {
             value={localVacancyFilter.keyword}
             onSubmitButtonClick={handleSubmitButtonClick}
             onChange={handleSearchInputChange}
+            data-elem="search-input"
           />
           <StyledMainContent>
             {isSuccess && !isFetching ? <VacancyList vacancies={vacancyList.objects} /> : <Loader />}

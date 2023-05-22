@@ -13,19 +13,11 @@ interface SearchInputProps {
 
 export const SearchInput: FC<SearchInputProps> = ({ placeholder, onSubmitButtonClick, ...props }) => {
   const searchButton = (
-    <Button size={SIZE.SM} onClick={onSubmitButtonClick}>
+    <Button size={SIZE.SM} onClick={onSubmitButtonClick} data-elem="search-button">
       Поиск
     </Button>
   );
   const searchIcon = <SearchIcon />;
 
-  return (
-    <StyledSearchInput
-      icon={searchIcon}
-      placeholder={placeholder ?? ''}
-      size={SIZE.LG}
-      rightSection={searchButton}
-      {...props}
-    />
-  );
+  return <StyledSearchInput icon={searchIcon} placeholder={placeholder ?? ''} size={SIZE.LG} rightSection={searchButton} {...props} />;
 };

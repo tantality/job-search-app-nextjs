@@ -59,13 +59,21 @@ export const VacancyFilter: FC<VacancyFilterProps> = (props) => {
             placeholder="Выберите отрасль"
             value={String(localVacancyFilter.industryId)}
             onChange={handleDropdownChange}
+            data-elem="industry-select"
           />
         </NamedFormGroup>
         <NamedFormGroup groupName="Оклад">
-          <NumberInput placeholder="От" value={localVacancyFilter.paymentFrom} onChange={handlePaymentFromInput} />
-          <NumberInput placeholder="До" value={localVacancyFilter.paymentTo} onChange={handlePaymentToInput} />
+          <NumberInput
+            placeholder="От"
+            value={localVacancyFilter.paymentFrom}
+            onChange={handlePaymentFromInput}
+            data-elem="salary-from-input"
+          />
+          <NumberInput placeholder="До" value={localVacancyFilter.paymentTo} onChange={handlePaymentToInput} data-elem="salary-to-input" />
         </NamedFormGroup>
-        <Button onClick={handleSubmitButtonClick}>Применить</Button>
+        <Button onClick={handleSubmitButtonClick} data-elem="search-button">
+          Применить
+        </Button>
       </StyledContent>
     </StyledVacancyFilter>
   );
