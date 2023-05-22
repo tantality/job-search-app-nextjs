@@ -61,6 +61,14 @@ export const StyledNumberInput = styled(NumberInput)`
           stroke: #5e96fc;
         }
       }
+
+      &:disabled {
+        cursor: auto;
+        svg {
+          color: #d5d6dc;
+          stroke: #d5d6dc;
+        }
+      }
     }
 
     .mantine-NumberInput-controlUp {
