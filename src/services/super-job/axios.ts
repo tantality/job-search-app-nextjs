@@ -35,10 +35,18 @@ async function onResponseError(err: any): Promise<any> {
   return res;
 }
 
+interface ExtendedAxiosConfig extends AxiosRequestConfig {
+  retry: boolean;
+}
+
 const handleResponseError = async (err: any): Promise<any> => {
   if (isAxiosError(err)) {
-    const requestConfig = err.config as AxiosRequestConfig;
+    const requestConfig = err.config as ExtendedAxiosConfig;
     const errStatus = err.response?.status;
+
+    if (errStatus && requestConfig.retry) {
+      return Promise.reject(err);
+    }
 
     switch (errStatus) {
     case 401: {
@@ -55,7 +63,9 @@ const handleResponseError = async (err: any): Promise<any> => {
   return Promise.reject(err);
 };
 
-const handleUnauthorizedError = async (config: AxiosRequestConfig): Promise<any> => {
+const handleUnauthorizedError = async (config: ExtendedAxiosConfig): Promise<any> => {
+  config.retry = true;
+
   try {
     const { access_token, refresh_token } = await superJobApi.getTokens();
 
@@ -71,7 +81,9 @@ const handleUnauthorizedError = async (config: AxiosRequestConfig): Promise<any>
   }
 };
 
-const handleExpiredTokenError = async (config: AxiosRequestConfig): Promise<any> => {
+const handleExpiredTokenError = async (config: ExtendedAxiosConfig): Promise<any> => {
+  config.retry = true;
+
   try {
     const refreshToken = getItemFromLocalStorage(LOCAL_STORAGE_KEY.REFRESH_TOKEN);
     const refreshTokenAsString = String(refreshToken);
