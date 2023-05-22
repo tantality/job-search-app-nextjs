@@ -39,11 +39,11 @@ export const VacancyFilter: FC<VacancyFilterProps> = (props) => {
   };
 
   const handlePaymentFromInput = (value: number | ''): void => {
-    setLocalVacancyFilter((prev) => ({ ...prev, paymentFrom: Number(value) }));
+    setLocalVacancyFilter((prev) => ({ ...prev, paymentFrom: value }));
   };
 
   const handlePaymentToInput = (value: number | ''): void => {
-    setLocalVacancyFilter((prev) => ({ ...prev, paymentTo: Number(value) }));
+    setLocalVacancyFilter((prev) => ({ ...prev, paymentTo: value }));
   };
 
   return (
