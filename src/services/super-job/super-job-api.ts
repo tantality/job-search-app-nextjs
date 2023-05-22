@@ -1,6 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 import { VacancyFilterType } from '@/types';
 import { Industry } from '@/types/super-job/industries';
+import { Tokens } from '@/types/super-job/tokens';
 import { Vacancy, VacancyList } from '@/types/super-job/vacancies';
 import { axiosInstance } from './axios';
 
@@ -40,6 +41,20 @@ class SuperJobApi {
 
   async getIndustries(): Promise<Industry[]> {
     const res = await axiosInstance.get<Industry[]>('catalogues/');
+    return res.data;
+  }
+
+  async getTokens(): Promise<Tokens> {
+    const res = await axiosInstance.get<Tokens>('oauth2/password/', {
+      params: {
+        login: process.env.NEXT_PUBLIC_API_USER_LOGIN,
+        password: process.env.NEXT_PUBLIC_API_USER_PASSWORD,
+        hr: 0,
+        client_id: process.env.NEXT_PUBLIC_API_APP_ID,
+        client_secret: process.env.NEXT_PUBLIC_API_APP_SECRET_KEY,
+      },
+    });
+
     return res.data;
   }
 }
