@@ -24,8 +24,8 @@ export const VacancyFilter: FC<VacancyFilterProps> = (props) => {
   const handleResetButtonClick = (e: MouseEvent<HTMLButtonElement>): void => {
     e.stopPropagation();
     setCurrentPage(1);
-    setVacancyFilterToFetch((prev) => ({ ...INITIAL_DATA, keyword: prev.keyword }));
-    setLocalVacancyFilter((prev) => ({ ...INITIAL_DATA, keyword: prev.keyword }));
+    setLocalVacancyFilter(({ keyword }) => ({ ...INITIAL_DATA, keyword }));
+    setVacancyFilterToFetch({ ...INITIAL_DATA, keyword: localVacancyFilter.keyword });
   };
 
   const handleSubmitButtonClick = (e: MouseEvent<HTMLButtonElement>): void => {
