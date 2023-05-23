@@ -1,4 +1,7 @@
+import { Inter } from 'next/font/google';
 import { createGlobalStyle } from 'styled-components';
+
+const inter = Inter({ subsets: ['latin'] });
 
 export const GlobalStyles = createGlobalStyle`
 *,
@@ -40,6 +43,7 @@ body {
   min-height: 100vh;
   scroll-behavior: smooth;
   text-rendering: optimizeSpeed;
+  font-family: ${inter.style.fontFamily}; 
   line-height: 1.5;
 }
 
