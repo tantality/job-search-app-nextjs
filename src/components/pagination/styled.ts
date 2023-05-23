@@ -29,12 +29,9 @@ export const StyledPagination = styled(Pagination)`
     color: #d5d6dc;
   }
 
-  @media (max-width: 420px) {
+  @media (max-width: 500px) {
     .mantine-Pagination-control {
-      min-width: 30px;
-      padding: 0 4px;
-      height: 30px;
-      font-size: 14px;
+      min-height: 27px;
     }
   }
 `;
