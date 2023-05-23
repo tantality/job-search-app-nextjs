@@ -1,8 +1,8 @@
 import { VacancyFilterType } from '@/types';
 
 interface FilterParams {
-  payment_to?: string;
-  payment_from?: string;
+  payment_to?: number;
+  payment_from?: number;
   keyword?: string;
   catalogues?: number;
 }
