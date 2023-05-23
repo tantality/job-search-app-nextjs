@@ -1,10 +1,7 @@
 import styled from '@emotion/styled';
 import { Select } from '@mantine/core';
-import { Inter } from 'next/font/google';
 import styledComponents from 'styled-components';
 import DropdownDownArrowIcon from '../../../public/assets/icons/dropdown-down-arrow.svg';
-
-const inter = Inter({ subsets: ['latin'] });
 
 export const StyledDownArrowIcon = styledComponents(DropdownDownArrowIcon)`
   transition: transform 0.3s ease;
@@ -41,8 +38,6 @@ export const StyledDropdown = styled(Select)`
 
   .mantine-Select-input,
   .mantine-Select-item {
-    font-family: ${inter.style.fontFamily};
-    font-style: ${inter.style.fontStyle};
     font-weight: 400;
     font-size: 14px;
     line-height: 20px;

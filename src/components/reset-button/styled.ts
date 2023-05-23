@@ -1,15 +1,10 @@
 import styled from '@emotion/styled';
 import { Button, ButtonProps, createPolymorphicComponent } from '@mantine/core';
-import { Inter } from 'next/font/google';
-
-const inter = Inter({ subsets: ['latin'] });
 
 const _StyledResetButton = styled(Button)`
   padding: 0;
   height: auto;
   border: none;
-  font-family: ${inter.style.fontFamily};
-  font-style: ${inter.style.fontStyle};
   font-weight: 500;
   font-size: 14px;
   color: #acadb9;

@@ -1,16 +1,10 @@
 /* eslint-disable @typescript-eslint/indent */
 import styled from '@emotion/styled';
 import { Title } from '@mantine/core';
-import { Inter } from 'next/font/google';
 import { HEADING_ORDER } from '@/constants';
 import { HeadingProps } from '.';
 
-const inter = Inter({ subsets: ['latin'] });
-
 export const StyledHeading = styled(Title)<Pick<HeadingProps, 'order'>>`
-  font-family: ${inter.style.fontFamily};
-  font-style: ${inter.style.fontStyle};
-
   ${({ order }) => {
     switch (order) {
       case HEADING_ORDER.H1:

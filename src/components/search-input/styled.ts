@@ -1,8 +1,5 @@
 import styled from '@emotion/styled';
 import { TextInput } from '@mantine/core';
-import { Inter } from 'next/font/google';
-
-const inter = Inter({ subsets: ['latin'] });
 
 export const StyledSearchInput = styled(TextInput)`
   input::placeholder {
@@ -26,8 +23,6 @@ export const StyledSearchInput = styled(TextInput)`
   }
 
   .mantine-TextInput-input {
-    font-family: ${inter.style.fontFamily};
-    font-style: ${inter.style.fontStyle};
     font-weight: 400;
     font-size: 14px;
     line-height: 20px;

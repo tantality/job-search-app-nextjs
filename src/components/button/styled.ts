@@ -1,18 +1,13 @@
 import styled from '@emotion/styled';
 import { Button, createPolymorphicComponent } from '@mantine/core';
-import { Inter } from 'next/font/google';
 import { SIZE } from '@/constants';
 import { BUTTON_IMPORTANCE, BUTTON_PROPERTIES } from './constants';
 import { ButtonProps } from '.';
-
-const inter = Inter({ subsets: ['latin'] });
 
 const _StyledButton = styled(Button)<Required<Omit<ButtonProps, 'children'>>>`
   height: auto;
   border: none;
   border-radius: 8px;
-  font-family: ${inter.style.fontFamily};
-  font-style: ${inter.style.fontStyle};
   font-weight: 500;
   font-size: 14px;
   line-height: 21px;

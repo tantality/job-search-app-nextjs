@@ -1,15 +1,10 @@
 /* eslint-disable @typescript-eslint/indent */
 import styled from '@emotion/styled';
 import { Text } from '@mantine/core';
-import { Inter } from 'next/font/google';
 import { SIZE } from '@/constants';
 import { TextProps } from '.';
 
-const inter = Inter({ subsets: ['latin'] });
-
 export const StyledText = styled(Text, { shouldForwardProp: (prop) => prop !== 'lineHeight' })<Omit<TextProps, 'children'>>`
-  font-family: ${inter.style.fontFamily};
-  font-style: ${inter.style.fontStyle};
   line-height: ${({ lineHeight }): string => (lineHeight ? lineHeight : '20px;')};
   color: #232134;
 

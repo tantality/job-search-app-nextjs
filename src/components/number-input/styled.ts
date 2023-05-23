@@ -1,8 +1,5 @@
 import styled from '@emotion/styled';
 import { NumberInput } from '@mantine/core';
-import { Inter } from 'next/font/google';
-
-const inter = Inter({ subsets: ['latin'] });
 
 export const StyledNumberInput = styled(NumberInput)`
   input::placeholder {
@@ -18,8 +15,6 @@ export const StyledNumberInput = styled(NumberInput)`
   }
 
   .mantine-NumberInput-input {
-    font-family: ${inter.style.fontFamily};
-    font-style: ${inter.style.fontStyle};
     font-weight: 400;
     font-size: 14px;
     line-height: 20px;
