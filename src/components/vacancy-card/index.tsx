@@ -45,7 +45,7 @@ export const VacancyCard: FC<VacancyCardProps> = ({ size, headingProperties, vac
     <Heading {...headingProps}>{vacancy.profession}</Heading>
   );
 
-  const descriptionTextSize = isCardSizeEqualMD ? SIZE.SM : SIZE.LG;
+  const descriptionTextSize = isCardSizeEqualMD ? SIZE.MD : SIZE.LG;
   const locationTextLineHeight = isCardSizeEqualMD ? '19px' : '22px';
 
   const handleFavoriteButtonClick = (e: MouseEvent<HTMLButtonElement>, vacancyId: number): void => {
