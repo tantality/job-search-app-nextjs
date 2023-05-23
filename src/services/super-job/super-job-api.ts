@@ -4,20 +4,18 @@ import { Industry } from '@/types/super-job/industries';
 import { Tokens } from '@/types/super-job/tokens';
 import { Vacancy, VacancyList } from '@/types/super-job/vacancies';
 import { axiosInstance } from './axios';
+import { getDefinedFilterParams } from './utils';
 
 class SuperJobApi {
   async getVacanciesByFilter(page: number, itemsCount: number, filter: VacancyFilterType): Promise<VacancyList> {
-    const { paymentFrom, paymentTo, keyword, industryId } = filter;
+    const filterParams = getDefinedFilterParams(filter);
 
     const res = await axiosInstance.get<VacancyList>('vacancies/', {
       params: {
         published: 1,
         count: itemsCount,
         page: page - 1,
-        payment_to: paymentTo,
-        payment_from: paymentFrom,
-        keyword,
-        catalogues: industryId,
+        ...filterParams,
       },
     });
 
