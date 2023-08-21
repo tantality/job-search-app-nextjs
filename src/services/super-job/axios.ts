@@ -2,7 +2,7 @@ import axios from 'axios';
 import { onFulfilledRequest, onRejectedResponse } from './interceptor-handlers';
 
 export const axiosInstance = axios.create({
-  baseURL: 'https://startup-summer-proxy-production.up.railway.app/2.0/',
+  baseURL: 'https://proxy-for-superjob-api.onrender.com/2.0/',
   timeout: 2000,
   headers: {
     'x-secret-key': process.env.NEXT_PUBLIC_SECRET_KEY,
